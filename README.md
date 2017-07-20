@@ -54,8 +54,8 @@ plot.chrom(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.fi
 * Will by defualt plot region around N on X if no to or from specified
 
 ```
-plot.region(cnv_file="data/w_500/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-500.minw-4.cnv", from=3029368, to=3452041, bp1=3129368,bp2=3352041,chrom="X", tick=100000, title="222Kb DEL on X")
-```
+ plot.region(cnv_file="data/w_500/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-500.minw-4.cnv", from=3029368, to=3452041, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
+ ```
 
 
 # To do
