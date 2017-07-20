@@ -39,7 +39,7 @@ Example output from CNV-Seq:
 * Currently assumes *Drosophila* genome, and excludes chroms 4 and Y for grid plot. Will look for .cnv files in 'data/' unless alternative patch provided
 
 ```
-plot.all.grid()
+allPlot()
 ````
 
 ### Plot single chromosome
@@ -47,7 +47,7 @@ plot.all.grid()
 * Will default to plotting X chrom if not chrom specified
 
 ```
-plot.chrom(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-10000.minw-4.cnv")
+chromPlot(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-10000.minw-4.cnv")
 ```
 
 ### Plot region for specified chromosome
@@ -55,7 +55,7 @@ plot.chrom(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.fi
 * Will by defualt plot region around N on X if no to or from specified
 
 ```
- plot.region(cnv_file="data/w500/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-500.minw-4.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
+ regionPlot(cnv_file="data/w500/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-500.minw-4.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
  ```
 
 
