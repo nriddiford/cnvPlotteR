@@ -9,7 +9,7 @@
 #' @import ggplot2
 #' @keywords plot chrom
 #' @export
-#' @examples chromPlot(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-10000.minw-4.cnv")
+#' @examples chromPlot(cnv_file = "data/test.window-10000.cnv")
 
 
 chromPlot <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {

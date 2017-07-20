@@ -17,7 +17,7 @@ chromPlot(chrom = NA, cnv_file, ylim = c(-5, 5))
 Function to plot a single chromosomes for a given sample
 }
 \examples{
-chromPlot(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-10000.minw-4.cnv")
+chromPlot(cnv_file = "data/test.window-10000.cnv")
 }
 \keyword{chrom}
 \keyword{plot}
