@@ -7,7 +7,6 @@
 #' @import RColorBrewer
 #' @import scales
 #' @import ggplot2
-#' @import dplyr
 #' @keywords plot chrom
 #' @export
 #' @examples chromPlot(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-10000.minw-4.cnv")

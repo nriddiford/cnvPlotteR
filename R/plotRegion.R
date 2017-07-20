@@ -13,7 +13,6 @@
 #' @import RColorBrewer
 #' @import scales
 #' @import ggplot2
-#' @import dplyr
 #' @keywords plot region
 #' @export
 #' @examples regionPlot(cnv_file="data/w500/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-500.minw-4.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
