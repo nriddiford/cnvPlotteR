@@ -54,7 +54,7 @@ allPlot()
 * Will default to plotting X chrom if not chrom specified
 
 ```
-chromPlot(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-10000.minw-4.cnv")
+chromPlot(cnv_file = "data/test.window-10000.cnv")
 ```
 
 ### Plot region for specified chromosome
@@ -62,7 +62,7 @@ chromPlot(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.fil
 * Will by defualt plot region around N on X if no to or from specified
 
 ```
- regionPlot(cnv_file="data/w500/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-500.minw-4.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
+ regionPlot(cnv_file="data/w500/test.window-500.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
  ```
 
 
