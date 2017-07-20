@@ -38,7 +38,7 @@ plot.all.grid <- function(path = NA)
 * Will default to plotting X chrom if not chrom specified
 
 ```
-plot.chrom <- function(cnv_file, chrom = NA, ylim=c(-5,5))
+plot.chrom(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-10000.minw-4.cnv")
 ```
 
 ### Plot region for specified chromosome
@@ -46,7 +46,7 @@ plot.chrom <- function(cnv_file, chrom = NA, ylim=c(-5,5))
 * Will by defualt plot region around N on X if no to or from specified
 
 ```
-plot.region <- function(cnv_file, from=NA, to=NA, chrom=NA, ylim=c(-5,5))
+plot.region(cnv_file="data/w_500/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-500.minw-4.cnv", from=3029368, to=3452041, bp1=3129368,bp2=3352041,chrom="X", tick=100000, title="222Kb DEL on X")
 ```
 
 
@@ -54,4 +54,4 @@ plot.region <- function(cnv_file, from=NA, to=NA, chrom=NA, ylim=c(-5,5))
 - [x] Allow user to control Y axis limits (for subtle CN changes)
 - [ ] Build in depth plots
 - [ ] Fix the ticks in Notch plots (show every 10kb?, start at round number)
-- [ ] Clean up the function calls (i.e. chrom=NA -> chrom=X to set as defualt)
+- [ ] Clean up the function calls (i.e. chrom=NA -> chrom=X to set as default)
