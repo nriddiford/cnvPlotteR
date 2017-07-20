@@ -6,6 +6,7 @@ Install from github:
 ```{R}
 library(devtools)
 install_github("nriddiford/cnvPlotteR")
+library(cnvPlotteR)
 ```
 
 ## Input
