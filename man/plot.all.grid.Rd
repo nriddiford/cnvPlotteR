@@ -4,15 +4,16 @@
 \alias{plot.all.grid}
 \title{plot.all.grid}
 \usage{
-plot.all.grid(path = NA)
+\method{plot}{all.grid}(path = NA)
 }
 \arguments{
-\item{path}{sets the path to cnv files. Defaults to 'NA' (and "cnvs/")}
+\item{path}{sets the path to cnv files. Defaults to 'NA' (and "data/")}
 }
 \description{
 Function to plot all chromosomes for all samples in defiuned path
 }
 \examples{
+plot.all.grid(path="data/")
 plot.all.grid()
 }
 \keyword{all}

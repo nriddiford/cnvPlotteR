@@ -4,8 +4,8 @@
 \alias{plot.region}
 \title{plot.region}
 \usage{
-plot.region(cnv_file, from = NA, to = NA, chrom = NA, ylim = c(-5, 5),
-  tick = 1000000, bp1 = NA, bp2 = NA, title = NA)
+\method{plot}{region}(cnv_file, from = NA, to = NA, chrom = NA,
+  ylim = c(-5, 5), tick = 1e+06, bp1 = NA, bp2 = NA, title = NA)
 }
 \arguments{
 \item{cnv_file}{cnv file to plot. Required}
@@ -30,6 +30,7 @@ plot.region(cnv_file, from = NA, to = NA, chrom = NA, ylim = c(-5, 5),
 Function to plot a particular region from a single chromosomes for a given sample
 }
 \examples{
+plot.region(cnv_file="data/w500/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-500.minw-4.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
 plot.region()
 }
 \keyword{plot}

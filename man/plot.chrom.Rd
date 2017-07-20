@@ -4,7 +4,7 @@
 \alias{plot.chrom}
 \title{plot.chrom}
 \usage{
-plot.chrom(chrom = NA, cnv_file, ylim = c(-5, 5))
+\method{plot}{chrom}(chrom = NA, cnv_file, ylim = c(-5, 5))
 }
 \arguments{
 \item{chrom}{Specify the chromosome to plot (defualts to 'X')}
@@ -17,6 +17,7 @@ plot.chrom(chrom = NA, cnv_file, ylim = c(-5, 5))
 Function to plot a single chromosomes for a given sample
 }
 \examples{
+plot.chrom(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-10000.minw-4.cnv")
 plot.chrom()
 }
 \keyword{chrom}

@@ -7,7 +7,7 @@
 #' @import ggplot2
 #' @keywords plot all
 #' @export
-#' @examples
+#' @examples plot.all.grid(path="data/")
 #' plot.all.grid()
 
 
