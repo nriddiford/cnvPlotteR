@@ -60,7 +60,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom=NA, ylim=c(-5,5), tick=10
   cat("Plotting region ", chrom, ":", from, "-", to, " for ", sample, "\n", sep="")
 
   read_file_in <- read.delim(cnv_file, header = T)
-  clean_file <- file.cleanR(read_file_in, region=T)
+  clean_file <- cleanR(read_file_in, region=T)
   cols <- brewer.pal(n = 7, name = "RdBu")
   chrom_data <- subset(clean_file, clean_file$chromosome == chrom)
 
@@ -72,7 +72,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom=NA, ylim=c(-5,5), tick=10
   p <- p + scale_y_continuous("Log2 FC ratio",limits=ylim, expand = c(0, 0), breaks = seq(min(ylim),max(ylim),by=1))
   p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
 
-  p <- p + clean_theme()
+  p <- p + cleanTheme()
   
   # Draw lines for log values corresponding to FC 2, 1.5 and 1.25
   p <- p + geom_hline(yintercept = -1, colour = "royalblue", alpha = 0.4)

@@ -1,4 +1,4 @@
-#' file.cleanR
+#' cleanR
 #'
 #' Function to clean the cnv files
 #' @param cnv_file cnv file to clean. Required
@@ -7,9 +7,9 @@
 #' @import dplyr
 #' @export
 #' @examples
-#' file.cleanR()
+#' cleanR()
 
-file.cleanR <- function(cnv_file, region=F) {
+cleanR <- function(cnv_file, region=F) {
   options(scipen=1000000)
   clean_file <- filter(cnv_file, is.finite(log2) )
 

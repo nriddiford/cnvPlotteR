@@ -1,4 +1,4 @@
-#' clean.theme
+#' cleanTheme
 #'
 #' Clean theme for plotting
 #' @param base_size = sets the base font size, defaults to 12
@@ -6,9 +6,9 @@
 #' @keywords theme
 #' @export
 #' @examples
-#' clean.theme()
+#' cleanTheme()
 
-clean_theme <- function(base_size = 12){
+cleanTheme <- function(base_size = 12){
   theme(
     plot.title = element_text(hjust = 0.5, size = 20),
     panel.background = element_blank(),

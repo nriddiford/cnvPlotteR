@@ -33,7 +33,7 @@ chromPlot <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {
   sample <- parts[1]
 
   read_file_in <- read.delim(cnv_file, header = T)
-  clean_file <- file.cleanR(read_file_in)
+  clean_file <- cleanR(read_file_in)
 
   cols <- brewer.pal(n = 7, name = "RdBu")
   chrom_data <- filter(clean_file, chromosome == chrom)
@@ -45,7 +45,7 @@ chromPlot <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {
   p <- p + scale_y_continuous("Log2 FC ratio",limits=ylim, expand = c(0, 0), breaks = seq(min(ylim),max(ylim),by=1))
   p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
 
-  p <- p + clean_theme()
+  p <- p + cleanTheme()
 
   if(chrom == "X"){
     p <- p + geom_vline(xintercept = 3.134, colour="slateblue", alpha=.7, linetype="dotted") + geom_vline(xintercept = 3.172, colour="slateblue", alpha=.7, linetype="dotted")

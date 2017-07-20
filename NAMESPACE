@@ -2,8 +2,8 @@
 
 export(allPlot)
 export(chromPlot)
-export(clean_theme)
-export(file.cleanR)
+export(cleanR)
+export(cleanTheme)
 export(regionPlot)
 import(RColorBrewer)
 import(dplyr)

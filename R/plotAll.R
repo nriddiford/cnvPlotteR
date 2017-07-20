@@ -25,7 +25,7 @@ allPlot <- function(path = NA) {
     sample <- parts[1]
 
     read_file_in <- read.delim(paste("cnvs/", file.names[i], sep = ""), header = T)
-    clean_file <- file.cleanR(read_file_in)
+    clean_file <- cleanR(read_file_in)
     cols <- brewer.pal(n = 7, name = "RdBu")
 
     ylim<-c(-5,5)
@@ -39,7 +39,7 @@ allPlot <- function(path = NA) {
     p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
     p <- p + facet_wrap(~chromosome, scale = "free_x", ncol = 2)
 	
-    p <- p + clean_theme(base_size = 10)
+    p <- p + cleanTheme(base_size = 10)
     
     p <- p + ggtitle(paste(sample))
 	
