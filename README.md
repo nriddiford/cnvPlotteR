@@ -5,7 +5,8 @@
 Install from github:
 
 ```
-git clone https://github.com/nriddiford/cnvPlotteR.git```
+git clone https://github.com/nriddiford/cnvPlotteR.git
+```
 
 Start an R session, and install package:
 
