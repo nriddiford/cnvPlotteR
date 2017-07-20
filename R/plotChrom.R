@@ -1,4 +1,4 @@
-#' plot.chrom
+#' chrom.plot
 #'
 #' Function to plot a single chromosomes for a given sample
 #' @param chrom Specify the chromosome to plot (defualts to 'X')
@@ -10,11 +10,10 @@
 #' @import dplyr
 #' @keywords plot chrom
 #' @export
-#' @examples plot.chrom(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-10000.minw-4.cnv")
-#' plot.chrom()
+#' @examples chrom.plot(cnv_file = "data/HUM-7.tagged.SC.hits.filt-vs-HUM-9.tagged.SC.hits.filt.window-10000.minw-4.cnv")
 
 
-plot.chrom <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {
+chrom.plot <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {
 
   cat("Processing", cnv_file, "\n")
 
