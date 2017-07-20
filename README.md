@@ -35,10 +35,10 @@ Example output from CNV-Seq:
 
 ### Plot all cnvs in specified directory for all chromosomes
 
-* Currently assumes *Drosophila* genome, and excludes chroms 4 and Y for grid plot
+* Currently assumes *Drosophila* genome, and excludes chroms 4 and Y for grid plot. Will look for .cnv files in 'data/' unless alternative patch provided
 
 ```
-plot.all.grid <- function(path = NA)
+plot.all.grid()
 ````
 
 ### Plot single chromosome
