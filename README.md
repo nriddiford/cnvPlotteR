@@ -3,6 +3,12 @@
 ## Installation
 
 Install from github:
+
+```
+git clone https://github.com/nriddiford/cnvPlotteR.git```
+
+Start an R session, and install package:
+
 ```{R}
 library(devtools)
 install_github("nriddiford/cnvPlotteR")
