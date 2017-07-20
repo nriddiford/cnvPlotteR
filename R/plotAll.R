@@ -1,4 +1,4 @@
-#' all.grid.plot
+#' all.plot
 #'
 #' Function to plot all chromosomes for all samples in defiuned path
 #' @param path sets the path to cnv files. Defaults to 'NA' (and "data/")
@@ -7,10 +7,10 @@
 #' @import ggplot2
 #' @keywords plot all
 #' @export
-#' @examples all.grid.plot(path="data/")
+#' @examples all.plot(path="data/")
 
 
-all.grid.plot <- function(path = NA) {
+all.plot <- function(path = NA) {
   if (is.na(path)) {
     path <- "data/"
     cat("No file path provided - defaulting to", path, "\n")
