@@ -1,5 +1,13 @@
 # Plotting functions for CNV data
 
+## Installation
+
+Install from github:
+```{R}
+library(devtools)
+install_github("nriddiford/cnvPlotteR")
+```
+
 ## Input
 
 * Designed to read output from [CNV-Seq](http://tiger.dbs.nus.edu.sg/cnv-seq/doc/manual.pdf), although should work for any coverage data with cols:
