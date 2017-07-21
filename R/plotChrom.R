@@ -1,15 +1,15 @@
 #' chromPlot
 #'
 #' Function to plot a single chromosomes for a given sample
-#' @param chrom Specify the chromosome to plot (defualts to 'X')
-#' @param cnv_file cnv file to plot. Required
-#' @param ylim allows adjustment of y axis limits in plot
+#' @param chrom Specify the chromosome to plot [Defualt 'X']
+#' @param cnv_file File to plot. [Required]
+#' @param ylim Adjust y axis limits in plot [Default ylim=c(-5,5)]
 #' @import RColorBrewer
 #' @import scales
 #' @import ggplot2
 #' @keywords plot chrom
 #' @export
-#' @examples chromPlot(cnv_file = "data/test.window-10000.cnv")
+#' @examples chromPlot(cnv_file = "data/test.window-10000.cnv", chrom = "3R", ylim=c(-6,6))
 
 
 chromPlot <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {

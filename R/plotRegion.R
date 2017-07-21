@@ -1,15 +1,15 @@
 #' regionPlot
 #'
-#' Function to plot a particular region from a single chromosomes for a given sample
-#' @param cnv_file cnv file to plot. Required
-#' @param from start coordinate of plotting window
-#' @param to end coordinate of plotting window
-#' @param chrom Specify the chromosome to plot (defualts to 'X')
-#' @param ylim allows adjustment of y axis limits in plot
-#' @param tick allows adjustment of spacing of ticks. Defualt 1Mb
-#' @param bp1 draw a vertical line at given coordinate to mark bp1
-#' @param bp2 draw a vertical line at given coordinate to mark bp2
-#' @param title provide a title for the plot
+#' Function to plot a particular region from a single chromosomes for a sample
+#' @param cnv_file File to plot. [Required]
+#' @param from Start coordinate of plotting window [Default from=2950000 ]
+#' @param to End coordinate of plotting window [Default to=3400000]
+#' @param chrom Specify the chromosome to plot [Default 'X']
+#' @param ylim Adjust y axis limits in plot [Default ylim=c(-5,5)]
+#' @param tick Adjust spacing of ticks [Defualt 1Mb]
+#' @param bp1 Draw a vertical line at given coordinate to mark bp1
+#' @param bp2 Draw a vertical line at given coordinate to mark bp2
+#' @param title Plot title
 #' @import RColorBrewer
 #' @import scales
 #' @import ggplot2

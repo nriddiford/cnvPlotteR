@@ -1,7 +1,7 @@
 #' cleanTheme
 #'
 #' Clean theme for plotting
-#' @param base_size = sets the base font size, defaults to 12
+#' @param base_size Base font size [Default 12]
 #' @import ggplot2
 #' @keywords theme
 #' @export

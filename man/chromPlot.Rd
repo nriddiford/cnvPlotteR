@@ -7,17 +7,17 @@
 chromPlot(chrom = NA, cnv_file, ylim = c(-5, 5))
 }
 \arguments{
-\item{chrom}{Specify the chromosome to plot (defualts to 'X')}
+\item{chrom}{Specify the chromosome to plot [Defualt 'X']}
 
-\item{cnv_file}{cnv file to plot. Required}
+\item{cnv_file}{File to plot. [Required]}
 
-\item{ylim}{allows adjustment of y axis limits in plot}
+\item{ylim}{Adjust y axis limits in plot [Default ylim=c(-5,5)]}
 }
 \description{
 Function to plot a single chromosomes for a given sample
 }
 \examples{
-chromPlot(cnv_file = "data/test.window-10000.cnv")
+chromPlot(cnv_file = "data/test.window-10000.cnv", chrom = "3R", ylim=c(-6,6))
 }
 \keyword{chrom}
 \keyword{plot}

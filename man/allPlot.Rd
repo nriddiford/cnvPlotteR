@@ -7,10 +7,10 @@
 allPlot(path = NA)
 }
 \arguments{
-\item{path}{sets the path to cnv files. Defaults to 'NA' (and "data/")}
+\item{path}{Sets the path to cnv files. [Default "data/"]}
 }
 \description{
-Function to plot all chromosomes for all samples in defiuned path
+Function to plot all chromosomes for all samples in path provided
 }
 \examples{
 allPlot(path="data/")

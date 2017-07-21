@@ -7,7 +7,7 @@
 cleanTheme(base_size = 12)
 }
 \arguments{
-\item{base_size}{= sets the base font size, defaults to 12}
+\item{base_size}{Base font size [Default 12]}
 }
 \description{
 Clean theme for plotting

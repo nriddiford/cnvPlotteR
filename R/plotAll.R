@@ -1,7 +1,7 @@
 #' allPlot
 #'
-#' Function to plot all chromosomes for all samples in defiuned path
-#' @param path sets the path to cnv files. Defaults to 'NA' (and "data/")
+#' Function to plot all chromosomes for all samples in path provided
+#' @param path Sets the path to cnv files. [Default "data/"]
 #' @import RColorBrewer
 #' @import scales
 #' @import ggplot2

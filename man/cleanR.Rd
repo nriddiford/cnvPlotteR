@@ -7,12 +7,12 @@
 cleanR(cnv_file, region = F)
 }
 \arguments{
-\item{cnv_file}{cnv file to clean. Required}
+\item{cnv_file}{File to clean [Required]}
 
-\item{region}{more stringent filter for larger windows as defualt}
+\item{region}{More stringent filter for larger windows as defualt}
 }
 \description{
-Function to clean the cnv files
+Function to clean cnv files
 }
 \examples{
 cleanR()

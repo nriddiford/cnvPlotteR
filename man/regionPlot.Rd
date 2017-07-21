@@ -5,29 +5,29 @@
 \title{regionPlot}
 \usage{
 regionPlot(cnv_file, from = NA, to = NA, chrom = NA, ylim = c(-5, 5),
-  tick = 1000000, bp1 = NA, bp2 = NA, title = NA)
+  tick = 1e+06, bp1 = NA, bp2 = NA, title = NA)
 }
 \arguments{
-\item{cnv_file}{cnv file to plot. Required}
+\item{cnv_file}{File to plot. [Required]}
 
-\item{from}{start coordinate of plotting window}
+\item{from}{Start coordinate of plotting window [Default from=2950000 ]}
 
-\item{to}{end coordinate of plotting window}
+\item{to}{End coordinate of plotting window [Default to=3400000]}
 
-\item{chrom}{Specify the chromosome to plot (defualts to 'X')}
+\item{chrom}{Specify the chromosome to plot [Default 'X']}
 
-\item{ylim}{allows adjustment of y axis limits in plot}
+\item{ylim}{Adjust y axis limits in plot [Default ylim=c(-5,5)]}
 
-\item{tick}{allows adjustment of spacing of ticks. Defualt 1Mb}
+\item{tick}{Adjust spacing of ticks [Defualt 1Mb]}
 
-\item{bp1}{draw a vertical line at given coordinate to mark bp1}
+\item{bp1}{Draw a vertical line at given coordinate to mark bp1}
 
-\item{bp2}{draw a vertical line at given coordinate to mark bp2}
+\item{bp2}{Draw a vertical line at given coordinate to mark bp2}
 
-\item{title}{provide a title for the plot}
+\item{title}{Plot title}
 }
 \description{
-Function to plot a particular region from a single chromosomes for a given sample
+Function to plot a particular region from a single chromosomes for a sample
 }
 \examples{
 regionPlot(cnv_file="data/w500/test.window-500.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")

@@ -1,8 +1,8 @@
 #' cleanR
 #'
-#' Function to clean the cnv files
-#' @param cnv_file cnv file to clean. Required
-#' @param region more stringent filter for larger windows as defualt
+#' Function to clean cnv files
+#' @param cnv_file File to clean [Required]
+#' @param region More stringent filter for larger windows as defualt
 #' @keywords clean
 #' @import dplyr
 #' @export
