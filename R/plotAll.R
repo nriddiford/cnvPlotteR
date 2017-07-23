@@ -10,12 +10,7 @@
 #' @examples allPlot(path="data/")
 
 
-allPlot <- function(path = NA) {
-  if (is.na(path)) {
-    path <- "data/"
-    cat("No file path provided - defaulting to", path, "\n")
-  }
-
+allPlot <- function(path = 'data/') {
   dir.create(file.path("plots"), showWarnings = FALSE)
   file.names <- dir(path, pattern = ".cnv")
 
