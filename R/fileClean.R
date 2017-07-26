@@ -6,8 +6,7 @@
 #' @keywords clean
 #' @import dplyr
 #' @export
-#' @examples
-#' cleanR()
+
 
 cleanR <- function(cnv_file, region=F) {
   options(scipen=1000000)

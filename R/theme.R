@@ -5,8 +5,7 @@
 #' @import ggplot2
 #' @keywords theme
 #' @export
-#' @examples
-#' cleanTheme()
+
 
 cleanTheme <- function(base_size = 12){
   theme(
