@@ -12,7 +12,4 @@ cleanTheme(base_size = 12)
 \description{
 Clean theme for plotting
 }
-\examples{
-cleanTheme()
-}
 \keyword{theme}

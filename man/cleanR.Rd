@@ -14,7 +14,4 @@ cleanR(cnv_file, region = F)
 \description{
 Function to clean cnv files
 }
-\examples{
-cleanR()
-}
 \keyword{clean}
