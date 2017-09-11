@@ -19,7 +19,7 @@ allPlot <- function(path = 'data/') {
     parts <- strsplit(file.names[i], "[.]")[[1]]
     sample <- parts[1]
 
-    read_file_in <- read.delim(paste("cnvs/", file.names[i], sep = ""), header = T)
+    read_file_in <- read.delim(paste("data/", file.names[i], sep = ""), header = T)
     clean_file <- cleanR(read_file_in)
     cols <- brewer.pal(n = 7, name = "RdBu")
 
