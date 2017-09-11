@@ -18,7 +18,7 @@
 #' @examples regionPlot(cnv_file="data/w500/test.window-500.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
 
 
-regionPlot <- function(cnv_file, from=NA, to=NA, chrom=NA, ylim=c(-5,5), tick=1000000, bp1=NA, bp2=NA, title=NA) {
+regionPlot <- function(cnv_file, from=NA, to=NA, chrom=NA, ylim=c(-5,5), tick=100000, bp1=NA, bp2=NA, title=NA) {
 
   cat("Processing", cnv_file, "\n")
 
