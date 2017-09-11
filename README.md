@@ -57,6 +57,16 @@ allPlot()
 chromPlot(cnv_file = "data/test.window-10000.cnv")
 ```
 
+* Plot all chroms for all files:
+
+```{R}
+for (f in file.names){
+  for (c in c("2L", "2R", "3L", "3R", "X")){
+    chromPlot(chrom=c, cnv_file=paste("data/cnvs/",f, sep=''))
+  }
+}
+```
+
 ### Plot region for specified chromosome
 
 * Will by defualt plot region around N on X if no to or from specified
