@@ -3,7 +3,7 @@ Title: Plotting functions for CNV data
 Version: 0.0.0.9000
 Authors@R: person("Nick", "Riddiford", email = "nick.riddiford@curie.fr", role = c("aut", "cre"))
 Description: A group of functions to explore CNV data produced by (or formatted like) CNV-Seq.
-Depends: R (>= 3.3.0)
+Depends: R (>= 3.2.3)
 License: MIT
 Encoding: UTF-8
 LazyData: true
