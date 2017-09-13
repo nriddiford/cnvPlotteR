@@ -60,6 +60,8 @@ chromPlot(cnv_file = "data/test.window-10000.cnv")
 * Plot all chroms for all files:
 
 ```{R}
+file.names <- dir("data/", pattern = ".cnv")
+
 for (f in file.names){
   for (c in c("2L", "2R", "3L", "3R", "X")){
     chromPlot(chrom=c, cnv_file=paste("data/cnvs/",f, sep=''))
