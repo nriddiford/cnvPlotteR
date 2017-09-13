@@ -4,7 +4,7 @@
 \alias{regionPlot}
 \title{regionPlot}
 \usage{
-regionPlot(cnv_file, from = NA, to = NA, chrom = NA, ylim = c(-5, 5),
+regionPlot(cnv_file, from = NA, to = NA, chrom = "X", ylim = c(-5, 5),
   tick = 100000, bp1 = NA, bp2 = NA, title = NA)
 }
 \arguments{
