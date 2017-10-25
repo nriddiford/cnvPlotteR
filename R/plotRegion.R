@@ -25,7 +25,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   if (is.na(from & to)) {
     from<-2950000
     to<-3400000
-    cat("No region specified - defaulting to X:2939623-3408302", "\n")
+    cat("No region specified - defaulting to X:2950000-3400000", "\n")
     notch <- 1
     }
   else {
@@ -36,7 +36,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   if (!is.na(tick)) {
     cat("Plotting ticks on", chrom, "every", tick, "\n")
   }
-  
+
   if (!is.na(bp1 & bp2)){
     cat("Drawing lines for breakpoints: bp1=", bp1, " bp2=", bp2, "\n")
 	draw_bps <- 1
@@ -71,7 +71,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
 
   p <- p + cleanTheme()
-  
+
   # Draw lines for log values corresponding to FC 2, 1.5 and 1.25
   p <- p + geom_hline(yintercept = -1, colour = "royalblue", alpha = 0.4)
   p <- p + geom_hline(yintercept = 1, colour = "royalblue", alpha = 0.4)
@@ -89,27 +89,27 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
     p <- p + annotate("text", x = 3153000, y = (min(ylim)+0.25), label="Notch", size=6)
     p <- p + annotate("text", x = 3259000, y = (min(ylim)+0.25), label="Dunce", size=6)
   }
-   
+
   if(draw_bps){
     p <- p + geom_vline(xintercept = bp1, colour="slateblue", alpha=.7, linetype="dotted")
     p <- p + geom_vline(xintercept = bp2, colour="slateblue", alpha=.7, linetype="dotted")
   }
-  
-  
+
+
   scale_bar_start <- (from+(tick/10))
   scale_bar_end <- (scale_bar_start + tick)
-  
-  scale_text <- paste(tick/1000000, "Mb")  
+
+  scale_text <- paste(tick/1000000, "Mb")
   p <- p + annotate("rect", xmin=scale_bar_start, xmax=scale_bar_end, ymin=(min(ylim)+1), ymax=(min(ylim)+0.8), fill="black")
   p <- p + annotate("text", x=(scale_bar_start + (tick/2)), y = (min(ylim)+1.2), label=scale_text, size=8)
   if (!is.na(title)){
     p <- p + ggtitle(paste(title))
-  	
+
   }
   else {
     p <- p + ggtitle(paste(sample, " ", chrom, sep = ""))
   }
-  
+
   # Include "draw_box options"
 
   # p <- p + annotate("rect", xmin=32055277, xmax=32068460, ymin=(min(ylim)+0.2), ymax=min(ylim), alpha=.075, fill="skyblue4")

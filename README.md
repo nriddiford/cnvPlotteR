@@ -23,8 +23,8 @@ library(cnvPlotteR)
 "chromosome"  
 "start" - 1-based window start  
 "end" - 1-based window end  
-"test" - reads mapped in window in tumour sample  
-"ref" - reads mapped in window in normal sample  
+"test" - number of reads mapped in window in tumour sample  
+"ref" - number of reads mapped in window in normal sample  
 "position" - (end - start) +1  
 "log2" - log2 FC for tumour/normal reads per window  
 
@@ -43,7 +43,7 @@ Example output from CNV-Seq:
 
 ### Plot all cnvs in specified directory for all chromosomes
 
-* Currently assumes *Drosophila* genome, and excludes chroms 4 and Y for grid plot. Will look for .cnv files in 'data/' unless alternative patch provided
+* Currently assumes *Drosophila* genome, and excludes chroms 4 and Y for grid plot. Will look for .cnv files in 'data/' unless alternative path provided
 
 ```
 allPlot()
@@ -51,7 +51,7 @@ allPlot()
 
 ### Plot single chromosome
 
-* Will default to plotting X chrom if not chrom specified
+* Will default to plotting X chromosome if `chrom` not specified
 
 ```
 chromPlot(cnv_file = "data/test.window-10000.cnv")
@@ -71,7 +71,7 @@ for (f in file.names){
 
 ### Plot region for specified chromosome
 
-* Will by defualt plot region around N on X if no to or from specified
+* Will by default plot region around N on X if no `to` or `from` specified
 
 ```
  regionPlot(cnv_file="data/w500/test.window-500.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
