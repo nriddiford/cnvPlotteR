@@ -119,10 +119,10 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   # p <- p + annotate("rect", xmin=32066206, xmax=32068392, ymin=(min(ylim)), ymax=max(ylim), alpha=.1, fill="red")
 
   if(notch){
-    outfile <- paste(sample, ".", "Notch", ".tiff", sep = "")
+    outfile <- paste(sample, ".", "Notch", ".png", sep = "")
   }
   else {
-    outfile <- paste(sample, ".", chrom, "_", from, "-", to, ".tiff", sep = "")
+    outfile <- paste(sample, ".", chrom, "_", from, "-", to, ".png", sep = "")
   }
   cat("Writing file", outfile, "to '../plots/regions/'", "\n")
   ggsave(paste("plots/regions/", outfile, sep = ""), width = 20, height = 10)
