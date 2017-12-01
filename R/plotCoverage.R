@@ -26,7 +26,7 @@ plotCoverage <- function(counts_file = 'data/counts/A785-A788R11.tagged.SC.hits.
   colours<-c( "#E7B800", "#00AFBB")
   
   df <- counts %>%
-    gather(test, ref, key="sample", value = read_count, -start) %>%
+    dplyr::gather(test, ref, key="sample", value = read_count, -start) %>%
     select(sample, chromosome, read_count, start) %>% 
     mutate(depth = (read_count/windowSize)*readLength) %>%
     mutate(pos = start/1000000) %>%

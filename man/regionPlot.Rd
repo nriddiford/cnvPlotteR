@@ -5,7 +5,7 @@
 \title{regionPlot}
 \usage{
 regionPlot(cnv_file, from = NA, to = NA, chrom = "X", ylim = c(-5, 5),
-  tick = 100000, bp1 = NA, bp2 = NA, title = NA)
+  tick = 1e+05, bp1 = NA, bp2 = NA, title = NA)
 }
 \arguments{
 \item{cnv_file}{File to plot. [Required]}
