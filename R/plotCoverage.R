@@ -4,7 +4,7 @@
 #' @param counts_file File to plot. [Required]
 #' @param readLength Specifiy the length of read [Default 100]
 #' @param windowSize Specifiy the window size used [Default 50000]
-#' @import dplyr
+#' @import tidyr
 #' @keywords plot chrom
 #' @export
 #' @examples plotCoverage(counts_file = 'data/counts/A785-A788R11.tagged.SC.hits.filt-vs-A785-A788R12.tagged.SC.hits.filt.window-50000.minw-4.count', readLength=100,windowSize = 50000)
