@@ -35,17 +35,20 @@ plotCoverage <- function(counts_file = 'data/counts/A785-A788R11.tagged.SC.hits.
     select(sample, chromosome, depth, pos) %>%
 
     filter(chromosome != "Y", chromosome != 4) %>%
-    arrange(pos, chromosome)
+    arrange(chromosome, pos)
 
 
     p <- ggplot(df) +
       geom_density(aes(pos, depth, fill=sample, colour=sample), stat='identity', alpha =0.6) +
-      scale_x_continuous("Mb", expand = c(0.001, 0.001), breaks = seq(0, max(df$pos), by =1 )) +
-      scale_y_continuous("Depth", expand = c(0.1, 0.1)) +
+      scale_x_continuous("Mb", expand = c(0.001, 0.001), breaks = seq(0, max(df$pos), by = 1 )) +
+      scale_y_continuous("Depth", expand = c(0.01, 0.01)) +
 
       facet_wrap(~chromosome, ncol=1, scales = 'free_x') +
       cleanTheme() +
-        theme( panel.grid.major.y = element_line(color="grey80", size = 0.5, linetype = "dotted")) +
+        theme( panel.grid.major.y = element_line(color="grey80", size = 0.5, linetype = "dotted"),
+               strip.text = element_text(size=20),
+               axis.text.y = element_text(size=15),
+               axis.title = element_text(size=20)) +
 
       scale_fill_manual(values=colours) +
       scale_colour_manual(values=colours)
