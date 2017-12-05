@@ -1,5 +1,10 @@
 data/*
+!data/test.window-10000.cnv
+!data/w500/test.window-500.cnv
 plots/*
+!plots/test_CNVs.pdf
+!plots/regions/test.X_3050000-3450000.pdf
+!plots/coverage/test_coverage.png
 .Rproj.user
 .Rhistory
 .RData
