@@ -45,6 +45,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
     draw_bps <- F
   }
 
+
   cat("Chrom:", chrom, "\n")
   cat("Specified ylim", ylim , "\n")
 

@@ -17,5 +17,6 @@ cleanR <- function(cnv_file, region=F) {
     clean_file <- filter(clean_file, test > 100)
   }
   # Don't bother plotting 4 or Y
-  clean_file <- filter(clean_file, chromosome != "Y" & chromosome != "4")
+  # clean_file <- filter(clean_file, chromosome != "Y" & chromosome != "4")
+  return(clean_file)
 }
