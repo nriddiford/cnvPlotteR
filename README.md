@@ -20,8 +20,7 @@ library(cnvPlotteR)
 ```{R}
 file.names <- dir("data/freec", pattern = ".txt")
 for (f in file.names){
-    freecPlot(cnv_file=paste("data/freec/",f, sep=''))
-  }
+  freecPlot(cnv_file=paste("data/freec/",f, sep=''))
 }
 ```
 
