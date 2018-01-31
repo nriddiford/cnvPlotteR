@@ -5,6 +5,7 @@
 #' @import RColorBrewer
 #' @import scales
 #' @import tidyverse
+#' @import dplyr
 #' @keywords plot normalised CN for Control Freec ratio file
 #' @export
 #' @examples freecPlot(cnv_file = "data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.txt")
