@@ -17,7 +17,7 @@ library(cnvPlotteR)
 ```
 ## Plot Control Freec normalised CNs
 
-The function `freecPlot` will plot all CNs for for all chromosomes (if using a non-Drosophila genome the variables `chroms` and `autosomes` should be adjusted accordingly). Sub-clonaly CNs are highlighted too.   
+The function `freecPlot` will plot all CNs for for all chromosomes (if using a non-Drosophila genome the variables `chroms` and `autosomes` should be adjusted accordingly). Sub-clonal CNs are highlighted too.   
 
 
 ```{R}
