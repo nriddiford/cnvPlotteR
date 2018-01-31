@@ -4,7 +4,6 @@
 #' @param cnv_file File to plot. [Required]
 #' @import RColorBrewer
 #' @import scales
-#' @import tidyverse
 #' @import dplyr
 #' @keywords plot normalised CN for Control Freec ratio file
 #' @export
