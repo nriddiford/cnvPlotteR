@@ -61,7 +61,7 @@ freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.t
   p <- p + geom_point(aes(Start, Ratio*ploidy, colour=colour),stat='identity', alpha =0.5, size = ratio$point_size)
   p <- p + scale_y_continuous("Normalised copy number", limits = c(0,6), breaks = seq(0,6, by=1))
   p <- p + facet_wrap(~Chromosome, ncol=2, scales='free_x')
-  cleanTheme() +
+  p <- p + cleanTheme() +
     theme( panel.grid.major.y = element_line(color="grey80", size = 0.5, linetype = "dotted"),
            strip.text = element_text(size=20),
            axis.text.y = element_text(size=15),
