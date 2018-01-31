@@ -17,6 +17,9 @@ library(cnvPlotteR)
 ```
 ## Plot Control Freec normalised CNs
 
+The function `freecPlot` will plot all CNs for for all chromosomes (if using a non-Drosophila genome the variables `chroms` and `autosomes` should be adjusted accordingly). Sub-clonaly CNs are highlighted too.   
+
+
 ```{R}
 file.names <- dir("data/freec", pattern = ".txt")
 for (f in file.names){
@@ -24,7 +27,7 @@ for (f in file.names){
 }
 ```
 
-## Input
+## Other plotting functions are for CNV-Seq output
 
 * Designed to read output from [CNV-Seq](http://tiger.dbs.nus.edu.sg/cnv-seq/doc/manual.pdf), although should work for any coverage data with cols:
 
