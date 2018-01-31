@@ -29,7 +29,7 @@ freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.t
   autosomes= c('2L', '2R', '3L', '3R', '4')
   sex_chroms=c('X','Y')
   green <- '#12A116FE'
-  sub_green <- '#D680C2FE'
+  sub_green <- '#9DD486FE'
   grey <- '#7A8B8B'
   red <- '#CC2121FE'
   sub_red <- '#DBD828FE'
@@ -37,10 +37,9 @@ freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.t
   ratio <- ratio %>%
     filter(Chromosome %in% chroms) %>%
     droplevels()
-    ratio$colour <- grey
 
-  ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$Subclone_CN>2 & ratio$Subclone_CN > 0 , sub_green, grey)
-  ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$Subclone_CN>1, sub_green, grey)
+  ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$Subclone_CN>2, sub_green, grey)
+  ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$Subclone_CN>1, sub_green, ratio$colour)
 
   ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$Subclone_CN<2 & ratio$Subclone_CN > 0,  sub_red, ratio$colour)
   ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$Subclone_CN<1 & ratio$Subclone_CN > 0, sub_red, ratio$colour)
@@ -52,9 +51,6 @@ freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.t
   ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$CopyNumber<1, red, ratio$colour)
 
   ratio$point_size <- ifelse(ratio$colour != grey, 0.9, 0.5)
-
-
-
 
   ploidy<-2
   p <- ggplot(ratio)

@@ -15,18 +15,27 @@ library(devtools)
 install_github("nriddiford/cnvPlotteR")
 library(cnvPlotteR)
 ```
+## Plot Control Freec normalised CNs
+
+```{R}
+file.names <- dir("data/freec", pattern = ".txt")
+for (f in file.names){
+    freecPlot(cnv_file=paste("data/freec/",f, sep=''))
+  }
+}
+```
 
 ## Input
 
 * Designed to read output from [CNV-Seq](http://tiger.dbs.nus.edu.sg/cnv-seq/doc/manual.pdf), although should work for any coverage data with cols:
 
-"chromosome"  
-"start" - 1-based window start  
-"end" - 1-based window end  
-"test" - number of reads mapped in window in tumour sample  
-"ref" - number of reads mapped in window in normal sample  
-"position" - (end - start) +1  
-"log2" - log2 FC for tumour/normal reads per window  
+"chromosome"
+"start" - 1-based window start
+"end" - 1-based window end
+"test" - number of reads mapped in window in tumour sample
+"ref" - number of reads mapped in window in normal sample
+"position" - (end - start) +1
+"log2" - log2 FC for tumour/normal reads per window
 
 Example output from CNV-Seq:
 
