@@ -67,7 +67,7 @@ freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.t
 
   freecOut <- paste(sample, "freec_cn.png", sep='_')
   cat("Writing file", freecOut, "\n")
-  ggsave(paste("plots/freec/", freecOut, sep=""), width = 20, height = 20)
+  ggsave(paste("plots/freec/", freecOut, sep=""), width = 20, height = 10)
 
   p
 
