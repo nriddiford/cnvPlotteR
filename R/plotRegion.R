@@ -27,7 +27,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
     to<-3400000
     cat("No region specified - defaulting to X:2950000-3400000", "\n")
     notch <- 1
-    }
+  }
   else {
     cat("Specified region", from, "-", to, "on", chrom, "\n")
     notch <- F
@@ -39,7 +39,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
 
   if (!is.na(bp1 & bp2)){
     cat("Drawing lines for breakpoints: bp1=", bp1, " bp2=", bp2, "\n")
-	draw_bps <- 1
+    draw_bps <- 1
   }
   else {
     draw_bps <- F
@@ -60,16 +60,21 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
 
   read_file_in <- read.delim(cnv_file, header = T)
   clean_file <- cleanR(read_file_in, region=T)
-  cols <- brewer.pal(n = 7, name = "RdBu")
+  # Change cols to give darker cols - 2.2.18
+  cols <- c("#941212FE", "#C44747FE", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
+  # cols <- brewer.pal(n = 5, name = "RdBu")
+
   chrom_data <- subset(clean_file, clean_file$chromosome == chrom)
 
   region <- subset(chrom_data, position>=from & position<=to)
   p <- ggplot(data=region, aes(start, log2, colour = log2))
-  p <- p + geom_point()
+  p <- p + geom_point(size=2.5)
   p <- p + scale_alpha(range = c(0.1, 5))
   p <- p + scale_x_continuous("Bp", expand = c(0.001, 0.001), breaks = seq(from, to, by = tick))
   p <- p + scale_y_continuous("Log2 FC ratio",limits=ylim, expand = c(0, 0), breaks = seq(min(ylim),max(ylim),by=1))
-  p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
+  #p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
+
+  p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, 0, 0.585, 3)), guide = "colorbar", limits = ylim)
 
   p <- p + cleanTheme()
 
@@ -82,9 +87,13 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   p <- p + geom_hline(yintercept = 0.322, colour = "slateblue", alpha = 0.4, linetype = "dotted")
 
   if(notch){
-    p <- p + annotate("rect", xmin=2950000, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="skyblue4")
-    p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="skyblue")
-    p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="slateblue")
+    # p <- p + annotate("rect", xmin=2950000, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="skyblue4")
+    # p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="skyblue")
+    # p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="slateblue")
+
+    p <- p + annotate("rect", xmin=2950000, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#CFAEAEFE")
+    p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#8FBD80FE")
+    p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
 
     p <- p + annotate("text", x = 3037000, y = (min(ylim)+0.25), label="Kirre", size=6)
     p <- p + annotate("text", x = 3153000, y = (min(ylim)+0.25), label="Notch", size=6)
@@ -127,4 +136,5 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   }
   cat("Writing file", outfile, "to '../plots/regions/'", "\n")
   ggsave(paste("plots/regions/", outfile, sep = ""), width = 20, height = 10)
+  p
 }
