@@ -1,3 +1,5 @@
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/nriddiford/cnvPlotteR/master)
+
 # Plotting functions for CNV data
 
 ## Installation
