@@ -120,19 +120,11 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
     p <- p + ggtitle(paste(sample, " ", chrom, sep = ""))
   }
 
-  # Include "draw_box options"
-
-  # p <- p + annotate("rect", xmin=32055277, xmax=32068460, ymin=(min(ylim)+0.2), ymax=min(ylim), alpha=.075, fill="skyblue4")
-  # p <- p + annotate("text", x = 32061277, y = (min(ylim)+0.125), label="map205", size=8)
-
-  # p <- p + annotate("rect", xmin=32060908, xmax=32061196, ymin=(min(ylim)), ymax=max(ylim), alpha=.1, fill="red")
-  # p <- p + annotate("rect", xmin=32066206, xmax=32068392, ymin=(min(ylim)), ymax=max(ylim), alpha=.1, fill="red")
-
   if(notch){
-    outfile <- paste(sample, ".", "Notch", ".png", sep = "")
+    outfile <- paste(sample, ".", "Notch", ".pdf", sep = "")
   }
   else {
-    outfile <- paste(sample, ".", chrom, "_", from, "-", to, ".png", sep = "")
+    outfile <- paste(sample, ".", chrom, "_", from, "-", to, ".pdf", sep = "")
   }
   cat("Writing file", outfile, "to '../plots/regions/'", "\n")
   ggsave(paste("plots/regions/", outfile, sep = ""), width = 20, height = 10)

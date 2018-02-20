@@ -21,7 +21,11 @@ allPlot <- function(path = 'data/') {
 
     read_file_in <- read.delim(paste(path, file.names[i], sep = ""), header = T)
     clean_file <- cleanR(read_file_in)
-    cols <- brewer.pal(n = 7, name = "RdBu")
+    clean_file <- filter(clean_file, chromosome != "Y" & chromosome != "4")
+
+    # cols <- brewer.pal(n = 7, name = "RdBu")
+    cols <- c("#941212FE", "#C44747FE", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
+
 
     ylim<-c(-5,5)
 
@@ -31,14 +35,19 @@ allPlot <- function(path = 'data/') {
     p <- p + scale_x_continuous("Mb", expand = c(0.001, 0.001))
     p <- p + scale_y_continuous("Log2 FC ratio",limits=ylim, expand = c(0, 0), breaks = seq(min(ylim),max(ylim),by=1))
 
-    p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
+    # p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
+    p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, 0, 0.585, 3)), guide = "colorbar", limits = ylim)
+
     p <- p + facet_wrap(~chromosome, scale = "free_x", ncol = 2)
-	
-    p <- p + cleanTheme(base_size = 10)
-    
+
+    p <- p + cleanTheme() +
+      theme(
+        axis.text = element_text(size=15)
+      )
+
     p <- p + ggtitle(paste(sample))
-	
-    outfile <- paste(sample, "_", "CNVs", ".pdf", sep = "")
+
+    outfile <- paste(sample, "_", "CNVs", ".png", sep = "")
     cat("Writing file", outfile, "to `plots/`", "\n")
     ggsave(paste("plots/", outfile, sep = ""), width = 20, height = 10)
 
