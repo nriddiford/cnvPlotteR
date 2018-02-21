@@ -45,8 +45,9 @@ chromPlot <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {
   p <- p + scale_x_continuous("Mb", expand = c(0.001, 0.001), breaks = seq(0, (max(chrom_data$end)-1), by = 1))
   p <- p + scale_y_continuous("Log2 FC ratio",limits=ylim, expand = c(0, 0), breaks = seq(min(ylim),max(ylim),by=1))
   # p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
-  p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, 0, 0.585, 3)), guide = "colorbar", limits = ylim)
+  p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.25, 0, 0.25, 3)), guide = "colorbar", limits = ylim)
 
+  # p <- p + blackTheme()
   p <- p + cleanTheme()
 
   if(chrom == "X"){
@@ -64,7 +65,7 @@ chromPlot <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {
 
   p <- p + ggtitle(paste(sample, " ", chrom, sep = ""))
 
-  outfile <- paste(sample, "_", chrom, "_", "CNVs", ".pdf", sep = "")
+  outfile <- paste(sample, "_", chrom, "_", "CNVs", ".png", sep = "")
   cat("Writing file", outfile, "to '../plots/chroms/'", "\n")
   ggsave(paste("plots/chroms/", outfile, sep = ""), width = 20, height = 10)
   p

@@ -74,8 +74,9 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   p <- p + scale_y_continuous("Log2 FC ratio",limits=ylim, expand = c(0, 0), breaks = seq(min(ylim),max(ylim),by=1))
   #p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
 
-  p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, 0, 0.585, 3)), guide = "colorbar", limits = ylim)
+  p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.25, 0, 0.25, 3)), guide = "colorbar", limits = ylim)
 
+  # p <- p + blackTheme()
   p <- p + cleanTheme()
 
   # Draw lines for log values corresponding to FC 2, 1.5 and 1.25
@@ -90,7 +91,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
     # p <- p + annotate("rect", xmin=2950000, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="skyblue4")
     # p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="skyblue")
     # p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="slateblue")
-
+    #kirre = 2740384
     p <- p + annotate("rect", xmin=2950000, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#CFAEAEFE")
     p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#8FBD80FE")
     p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
@@ -121,10 +122,10 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   }
 
   if(notch){
-    outfile <- paste(sample, ".", "Notch", ".pdf", sep = "")
+    outfile <- paste(sample, ".", "Notch", ".png", sep = "")
   }
   else {
-    outfile <- paste(sample, ".", chrom, "_", from, "-", to, ".pdf", sep = "")
+    outfile <- paste(sample, ".", chrom, "_", from, "-", to, ".png", sep = "")
   }
   cat("Writing file", outfile, "to '../plots/regions/'", "\n")
   ggsave(paste("plots/regions/", outfile, sep = ""), width = 20, height = 10)

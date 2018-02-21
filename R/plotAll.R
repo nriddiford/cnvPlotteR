@@ -36,10 +36,11 @@ allPlot <- function(path = 'data/') {
     p <- p + scale_y_continuous("Log2 FC ratio",limits=ylim, expand = c(0, 0), breaks = seq(min(ylim),max(ylim),by=1))
 
     # p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
-    p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, 0, 0.585, 3)), guide = "colorbar", limits = ylim)
+    p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.25, 0, 0.25, 3)), guide = "colorbar", limits = ylim)
 
     p <- p + facet_wrap(~chromosome, scale = "free_x", ncol = 2)
 
+    # p <- p + blackTheme() +
     p <- p + cleanTheme() +
       theme(
         axis.text = element_text(size=15)
