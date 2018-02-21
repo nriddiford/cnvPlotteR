@@ -64,7 +64,7 @@ chromPlot <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {
 
   p <- p + ggtitle(paste(sample, " ", chrom, sep = ""))
 
-  outfile <- paste(sample, "_", chrom, "_", "CNVs", ".png", sep = "")
+  outfile <- paste(sample, "_", chrom, "_", "CNVs", ".pdf", sep = "")
   cat("Writing file", outfile, "to '../plots/chroms/'", "\n")
   ggsave(paste("plots/chroms/", outfile, sep = ""), width = 20, height = 10)
   p
