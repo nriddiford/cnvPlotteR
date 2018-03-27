@@ -18,7 +18,7 @@
 #' @examples regionPlot(cnv_file="data/w500/test.window-500.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
 
 
-regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=100000, bp1=NA, bp2=NA, title=NA) {
+regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=100000, bp1=NA, bp2=NA, title=NA, ext='png') {
 
   cat("Processing", cnv_file, "\n")
 
@@ -80,12 +80,12 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   p <- p + cleanTheme()
 
   # Draw lines for log values corresponding to FC 2, 1.5 and 1.25
-  p <- p + geom_hline(yintercept = -1, colour = "royalblue", alpha = 0.4)
-  p <- p + geom_hline(yintercept = 1, colour = "royalblue", alpha = 0.4)
-  p <- p + geom_hline(yintercept = -0.585, colour = "blue", alpha = 0.4)
-  p <- p + geom_hline(yintercept = 0.585, colour = "blue", alpha = 0.4)
-  p <- p + geom_hline(yintercept = -0.322, colour = "slateblue", alpha = 0.4, linetype = "dotted")
-  p <- p + geom_hline(yintercept = 0.322, colour = "slateblue", alpha = 0.4, linetype = "dotted")
+  # p <- p + geom_hline(yintercept = -1, colour = "royalblue", alpha = 0.4)
+  # p <- p + geom_hline(yintercept = 1, colour = "royalblue", alpha = 0.4)
+  # p <- p + geom_hline(yintercept = -0.585, colour = "blue", alpha = 0.4)
+  # p <- p + geom_hline(yintercept = 0.585, colour = "blue", alpha = 0.4)
+  # p <- p + geom_hline(yintercept = -0.322, colour = "slateblue", alpha = 0.4, linetype = "dotted")
+  # p <- p + geom_hline(yintercept = 0.322, colour = "slateblue", alpha = 0.4, linetype = "dotted")
 
   if(notch){
     # p <- p + annotate("rect", xmin=2950000, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="skyblue4")
@@ -122,10 +122,10 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   }
 
   if(notch){
-    outfile <- paste(sample, ".", "Notch", ".png", sep = "")
+    outfile <- paste(sample, ".", "Notch.", ext, sep = "")
   }
   else {
-    outfile <- paste(sample, ".", chrom, "_", from, "-", to, ".png", sep = "")
+    outfile <- paste(sample, ".", chrom, "_", from, "-", to, ".", ext, sep = "")
   }
   cat("Writing file", outfile, "to '../plots/regions/'", "\n")
   ggsave(paste("plots/regions/", outfile, sep = ""), width = 20, height = 10)

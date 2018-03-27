@@ -12,7 +12,7 @@
 #' @examples chromPlot(cnv_file = "data/test.window-10000.cnv", chrom = "3R", ylim=c(-6,6))
 
 
-chromPlot <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {
+chromPlot <- function(chrom = NA, cnv_file, ylim=c(-5,5), ext='png') {
 
   cat("Processing", cnv_file, "\n")
 
@@ -60,12 +60,13 @@ chromPlot <- function(chrom = NA, cnv_file, ylim=c(-5,5)) {
     p <- p + geom_hline(yintercept = 0.585, colour = "blue", alpha = 0.4)
   }
 
-  p <- p + geom_hline(yintercept = -1, colour = "royalblue", alpha = 0.6)
-  p <- p + geom_hline(yintercept = 1, colour = "royalblue", alpha = 0.6)
+  # p <- p + geom_hline(yintercept = -1, colour = "royalblue", alpha = 0.6)
+  # p <- p + geom_hline(yintercept = 1, colour = "royalblue", alpha = 0.6)
 
   p <- p + ggtitle(paste(sample, " ", chrom, sep = ""))
 
-  outfile <- paste(sample, "_", chrom, "_", "CNVs", ".png", sep = "")
+
+  outfile <- paste(sample, "_", chrom, "_", "CNVs.", ext, sep = "")
   cat("Writing file", outfile, "to '../plots/chroms/'", "\n")
   ggsave(paste("plots/chroms/", outfile, sep = ""), width = 20, height = 10)
   p
