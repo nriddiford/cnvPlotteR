@@ -61,7 +61,7 @@ Example output from CNV-Seq:
 ```
 allPlot(path = 'path/to/cnv_files/')
 ````
-![allPlot]("plots/test_CNVs.pdf")
+![allPlot]("https://github.com/nriddiford/cnvPlotteR/plots/test_CNVs.pdf")
 
 
 ### Plot single chromosome
