@@ -59,8 +59,10 @@ Example output from CNV-Seq:
 * Currently assumes *Drosophila* genome, and excludes chroms 4 and Y for grid plot. Will look for .cnv files in 'data/' unless alternative path provided
 
 ```
-allPlot()
+allPlot(path = 'path/to/cnv_files/')
 ````
+![allPlot]("plots/test_CNVs.pdf")
+
 
 ### Plot single chromosome
 
