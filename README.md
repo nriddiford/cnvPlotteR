@@ -93,6 +93,9 @@ for (f in file.names){
  regionPlot(cnv_file="data/w500/test.window-500.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
  ```
 
+ <img src="plots/regions/test.Notch.png" alt="regionPlot X example"/>
+
+
 ### Plot coverage for all '.count' files
 
 * Use defaults: readLength = 100, windowSize = 50000
