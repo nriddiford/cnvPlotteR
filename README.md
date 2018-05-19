@@ -107,6 +107,9 @@ for (f in file.names){
 }
 ```
 
+<img src="plots/coverage/test_coverage.png" alt="plotCoverage example"/>
+
+
 # To do
 - [x] Allow user to control Y axis limits (for subtle CN changes)
 - [ ] Build in depth plots
