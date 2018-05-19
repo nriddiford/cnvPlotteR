@@ -61,8 +61,7 @@ Example output from CNV-Seq:
 ```
 allPlot(path = 'path/to/cnv_files/')
 ````
-![allPlot]("https://github.com/nriddiford/cnvPlotteR/plots/test_CNVs.pdf")
-<img src="plots/test_CNVs.png" alt="My cool logo"/>
+<img src="plots/test_CNVs.png" alt="allPlot example"/>
 
 ### Plot single chromosome
 
@@ -71,6 +70,8 @@ allPlot(path = 'path/to/cnv_files/')
 ```
 chromPlot(cnv_file = "data/test.window-10000.cnv")
 ```
+
+<img src="plots/chroms/test_X_CNVs.png" alt="chromPlot X example"/>
 
 * Plot all chroms for all files:
 
