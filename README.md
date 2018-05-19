@@ -95,7 +95,6 @@ for (f in file.names){
 
  <img src="plots/regions/test.X_3050000-3450000.png" alt="regionPlot X example"/>
 
-
 ### Plot coverage for all '.count' files
 
 * Use defaults: readLength = 100, windowSize = 50000
