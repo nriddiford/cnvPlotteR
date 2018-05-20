@@ -1,0 +1,35 @@
+---
+title: "cnvPlotter"
+date: "`r format(Sys.time(), '%B %e, %Y')`"
+output:
+  html_notebook:
+    theme: flatly
+    toc: yes
+    toc_float: yes
+    number_sections: true
+    code_folding: hide
+    df_print: paged
+  html_document: 
+    theme: flatly
+    toc: yes
+    toc_float: yes
+    number_sections: true
+    code_folding: hide
+    df_print: paged
+---
+
+```{r setup, include=FALSE, cache=TRUE}
+rootDir = "~/iCloud/Desktop/script_test/cnvPlotteR/"
+knitr::opts_knit$set(root.dir = rootDir)
+library(cnvPlotteR)
+```
+
+***
+
+# Real data
+
+## Many **Modencode Enriched** regions show very high enrichment for breakpoints
+
+```{r chrom-plot-test}
+chromPlot(cnv_file = "data/test.window-10000.cnv", write=F)
+```
