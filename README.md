@@ -29,6 +29,8 @@ for (f in file.names){
 }
 ```
 
+<img src="plots/freec/HUM-7_freec_cn.png" alt="Freec example"/>
+
 ## Other plotting functions are for CNV-Seq output
 
 * Designed to read output from [CNV-Seq](http://tiger.dbs.nus.edu.sg/cnv-seq/doc/manual.pdf), although should work for any coverage data with cols:
@@ -107,7 +109,8 @@ for (f in file.names){
 }
 ```
 
-<img src="plots/coverage/test_coverage.png" alt="plotCoverage example"/>
+<img src="plots/coverage/test_coverage.png" alt="plotCoverage
+example"/>
 
 
 # To do
