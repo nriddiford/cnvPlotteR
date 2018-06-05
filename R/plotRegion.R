@@ -60,8 +60,12 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
 
   read_file_in <- read.delim(cnv_file, header = T)
   clean_file <- cleanR(read_file_in, region=T)
-  # Change cols to give darker cols - 2.2.18
+
+  # For white background
   cols <- c("#941212FE", "#C44747FE", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
+  # For black background
+
+  # cols <- c("#EB7609", "#EBA17C", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
   # cols <- brewer.pal(n = 5, name = "RdBu")
 
   chrom_data <- subset(clean_file, clean_file$chromosome == chrom)
@@ -79,19 +83,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   # p <- p + blackTheme()
   p <- p + cleanTheme()
 
-  # Draw lines for log values corresponding to FC 2, 1.5 and 1.25
-  # p <- p + geom_hline(yintercept = -1, colour = "royalblue", alpha = 0.4)
-  # p <- p + geom_hline(yintercept = 1, colour = "royalblue", alpha = 0.4)
-  # p <- p + geom_hline(yintercept = -0.585, colour = "blue", alpha = 0.4)
-  # p <- p + geom_hline(yintercept = 0.585, colour = "blue", alpha = 0.4)
-  # p <- p + geom_hline(yintercept = -0.322, colour = "slateblue", alpha = 0.4, linetype = "dotted")
-  # p <- p + geom_hline(yintercept = 0.322, colour = "slateblue", alpha = 0.4, linetype = "dotted")
-
   if(notch){
-    # p <- p + annotate("rect", xmin=2950000, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="skyblue4")
-    # p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="skyblue")
-    # p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.075, fill="slateblue")
-    #kirre = 2740384
     p <- p + annotate("rect", xmin=2950000, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#CFAEAEFE")
     p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#8FBD80FE")
     p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
@@ -116,15 +108,13 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   if (!is.na(title)){
     p <- p + ggtitle(paste(title))
 
-  }
-  else {
+  } else {
     p <- p + ggtitle(paste(sample, " ", chrom, sep = ""))
   }
 
   if(notch){
     outfile <- paste(sample, ".", "Notch.", ext, sep = "")
-  }
-  else {
+  } else {
     outfile <- paste(sample, ".", chrom, "_", from, "-", to, ".", ext, sep = "")
   }
   cat("Writing file", outfile, "to '../plots/regions/'", "\n")

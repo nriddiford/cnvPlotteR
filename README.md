@@ -29,7 +29,7 @@ for (f in file.names){
 }
 ```
 
-<img src="plots/freec/HUM-7_freec_cn.png" alt="Freec example"/>
+<img src="plots/freec/test_freec_cn.png" alt="Freec example"/>
 
 ## Other plotting functions are for CNV-Seq output
 
