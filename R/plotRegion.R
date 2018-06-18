@@ -10,44 +10,45 @@
 #' @param bp1 Draw a vertical line at given coordinate to mark bp1
 #' @param bp2 Draw a vertical line at given coordinate to mark bp2
 #' @param title Plot title
-#' @import RColorBrewer
-#' @import scales
-#' @import ggplot2
+#' @import scales ggplot2 dplyr RColorBrewer
 #' @keywords plot region
 #' @export
 #' @examples regionPlot(cnv_file="data/w500/test.window-500.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
 
 
-regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=100000, bp1=NA, bp2=NA, title=NA, ext='png') {
+regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5),
+                       tick=100000, bp1=NA, bp2=NA, title=NA, ext='png', theme = 'white') {
 
   cat("Processing", cnv_file, "\n")
 
-  if (is.na(from & to)) {
-    from<-2950000
-    to<-3400000
+  if(!grepl('\\.', ext)) ext <- paste0('.', ext)
+
+  if (is.na(from) && is.na(to)) {
+    from <- 2950000
+    to <- 3400000
+    chrom <- "X"
     cat("No region specified - defaulting to X:2950000-3400000", "\n")
-    notch <- 1
-  }
-  else {
+  } else {
     cat("Specified region", from, "-", to, "on", chrom, "\n")
     notch <- F
   }
 
-  if (!is.na(tick)) {
-    cat("Plotting ticks on", chrom, "every", tick, "\n")
+  if(to > 2500000 && from < 3750000 && chrom == "X"){
+    cat("Specified Notch locus\n")
+    notch <- T
   }
 
-  if (!is.na(bp1 & bp2)){
+
+  if ( !is.na(bp1) && !is.na(bp2) ){
     cat("Drawing lines for breakpoints: bp1=", bp1, " bp2=", bp2, "\n")
     draw_bps <- 1
-  }
-  else {
+  } else {
     draw_bps <- F
   }
 
-
   cat("Chrom:", chrom, "\n")
   cat("Specified ylim", ylim , "\n")
+  cat("Plotting ticks on", chrom, "every", tick, "\n")
 
   dir.create(file.path("plots"), showWarnings = FALSE)
   dir.create(file.path("plots", "regions"), showWarnings = FALSE)
@@ -61,30 +62,46 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
   read_file_in <- read.delim(cnv_file, header = T)
   clean_file <- cleanR(read_file_in, region=T)
 
+  if (is.na(title)) title <- paste(sample, chrom, sep = " ")
+
   # For white background
-  cols <- c("#941212FE", "#C44747FE", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
+  if(theme=='white'){
+    cols <- c("#941212FE", "#C44747FE", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
+    customTheme = cleanTheme()
+    barfill = 'black'
+  }
   # For black background
+  if(theme=='black'){
+    # cols <- c("#EB7609", "#EBA17C", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
 
-  # cols <- c("#EB7609", "#EBA17C", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
-  # cols <- brewer.pal(n = 5, name = "RdBu")
+    # cols <- c("#F2EC3F", "#EBDE96", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
+    cols <- c("#F5D520", "#EBDC86", "#BCC1CC", "#9ACAD6", "#4CA8E6")
 
-  chrom_data <- subset(clean_file, clean_file$chromosome == chrom)
+    customTheme = blackTheme()
+    ext <- paste0('_dark', ext)
+    barfill = 'white'
+  }
 
-  region <- subset(chrom_data, position>=from & position<=to)
-  p <- ggplot(data=region, aes(start, log2, colour = log2))
+  region <- clean_file %>%
+    filter(chromosome == chrom) %>%
+    filter(position >= from & position <= to) %>%
+    droplevels()
+
+  p <- ggplot(region, aes(start, log2, colour = log2))
   p <- p + geom_point(size=2.5)
   p <- p + scale_alpha(range = c(0.1, 5))
   p <- p + scale_x_continuous("Bp", expand = c(0.001, 0.001), breaks = seq(from, to, by = tick))
   p <- p + scale_y_continuous("Log2 FC ratio",limits=ylim, expand = c(0, 0), breaks = seq(min(ylim),max(ylim),by=1))
-  #p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.585, -0.001, 0, 0.001, 0.585, 3)), guide = "colorbar", limits = ylim)
-
   p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.25, 0, 0.25, 3)), guide = "colorbar", limits = ylim)
+  p <- p + customTheme
 
-  # p <- p + blackTheme()
-  p <- p + cleanTheme()
+  # 2740384 3134532
 
   if(notch){
-    p <- p + annotate("rect", xmin=2950000, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#CFAEAEFE")
+    kirreStart = 2740384
+    if (kirreStart < from)
+      kirreStart = from
+    p <- p + annotate("rect", xmin=kirreStart, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#CFAEAEFE")
     p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#8FBD80FE")
     p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
 
@@ -98,26 +115,21 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5), tick=1
     p <- p + geom_vline(xintercept = bp2, colour="slateblue", alpha=.7, linetype="dotted")
   }
 
-
   scale_bar_start <- (from+(tick/10))
   scale_bar_end <- (scale_bar_start + tick)
 
   scale_text <- paste(tick/1000000, "Mb")
-  p <- p + annotate("rect", xmin=scale_bar_start, xmax=scale_bar_end, ymin=(min(ylim)+1), ymax=(min(ylim)+0.8), fill="black")
-  p <- p + annotate("text", x=(scale_bar_start + (tick/2)), y = (min(ylim)+1.2), label=scale_text, size=8)
-  if (!is.na(title)){
-    p <- p + ggtitle(paste(title))
+  p <- p + annotate("rect", xmin=scale_bar_start, xmax=scale_bar_end, ymin=(min(ylim)+1), ymax=(min(ylim)+0.8), fill=barfill)
+  p <- p + annotate("text", x=(scale_bar_start + (tick/2)), y = (min(ylim)+1.2), label=scale_text, size=8, colour=barfill)
 
-  } else {
-    p <- p + ggtitle(paste(sample, " ", chrom, sep = ""))
-  }
+  p <- p + ggtitle(title)
 
   if(notch){
-    outfile <- paste(sample, ".", "Notch.", ext, sep = "")
+    outfile <- paste0(sample, ".Notch", ext)
   } else {
-    outfile <- paste(sample, ".", chrom, "_", from, "-", to, ".", ext, sep = "")
+    outfile <- paste0(sample, ".", chrom, "_", from, "-", to, ".", ext)
   }
   cat("Writing file", outfile, "to '../plots/regions/'", "\n")
-  ggsave(paste("plots/regions/", outfile, sep = ""), width = 20, height = 10)
+  # ggsave(paste("plots/regions/", outfile, sep = ""), width = 20, height = 10)
   p
 }
