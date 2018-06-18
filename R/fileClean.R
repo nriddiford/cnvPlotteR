@@ -16,7 +16,6 @@ cleanR <- function(cnv_file, region=F) {
     cat("Filtering on number of reads per window (each window must have more than 100 reads in tum & cont)", "\n")
     clean_file <- filter(clean_file, test > 100)
   }
-  # Don't bother plotting 4 or Y
-  # clean_file <- filter(clean_file, chromosome != "Y" & chromosome != "4")
+  clean_file <- droplevels(clean_file)
   return(clean_file)
 }
