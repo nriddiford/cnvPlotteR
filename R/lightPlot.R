@@ -31,8 +31,16 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
     bp1 <- as.integer(vars[2])
     bp2 <- as.integer(vars[3])
     length <- bp2 - bp1
-    from <- bp1 - length*5
-    to <- bp2 + length*5
+
+    if(length>1e5){
+      from <- bp1 - 50000
+      to <- bp2 + 50000
+      tick = 1e5
+    } else{
+      from <- bp1 - 5000
+      to <- bp2 + 5000
+      tick = 1e4
+    }
   }
 
   cat("Processing", cnv_file, "\n")
@@ -63,10 +71,6 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
 
   if (missing(title)) title <- paste0(sample, chrom)
 
-  # For white background
-  customTheme = cleanTheme()
-  barfill = 'black'
-
   from <- plyr::round_any(from, 1e5, floor)
   to <- plyr::round_any(to, 1e5, ceiling)
 
@@ -77,15 +81,16 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
     mutate(mavlog2 = RcppRoll::roll_mean(log2, 10, fill=0))
 
   ylim <- plyr::round_any(max(abs(region$mavlog2)), 1, ceiling)
-  if (ylim < 2)
-    ylim = 2
+  if (ylim < 3)
+    ylim = 3
   ylim <- c(-ylim, ylim)
 
   p <- ggplot(region, aes(x = position, y = mavlog2))
   p <- p + geom_line(aes(colour = chromosome), size=2, show.legend = FALSE)
-  p <- p + scale_x_continuous("Bp", expand = c(0.001, 0.001), breaks = seq(from, to, by = 50000))
+  p <- p + scale_x_continuous("Mb", expand = c(0.001, 0.001), breaks = seq(from, to, by = tick), labels = seq(from/1e6, to/1e6, by = tick/1e6))
   p <- p + scale_y_continuous("Log2 FC ratio", limits=c(min(ylim),max(ylim)), expand = c(0.02, 0.02), breaks = seq(min(ylim), max(ylim),by=1))
-  p <- p + customTheme
+  p <- p + cleanTheme() +
+    theme(axis.text.x = element_text(angle = 90, hjust=1))
 
   if(notch){
     kirreStart = 2740384
@@ -100,7 +105,7 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
     p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#8FBD80FE")
     p <- p + annotate("rect", xmin=3176000, xmax=dunceEnd, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
 
-    p <- p + annotate("text", x = kirreStart+10000, y = (min(ylim)+0.25), label="Kirre", size=6)
+    p <- p + annotate("text", x = kirreStart+100000, y = (min(ylim)+0.25), label="Kirre", size=6)
     p <- p + annotate("text", x = 3153000, y = (min(ylim)+0.25), label="Notch", size=6)
     p <- p + annotate("text", x = dunceEnd-100000, y = (min(ylim)+0.25), label="Dunce", size=6)
   }
@@ -114,8 +119,8 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
   scale_bar_end <- (scale_bar_start + tick)
 
   scale_text <- paste(tick/1000000, "Mb")
-  p <- p + annotate("rect", xmin=scale_bar_start, xmax=scale_bar_end, ymin=(min(ylim)+0.6), ymax=(min(ylim)+0.7), fill=barfill)
-  p <- p + annotate("text", x=(scale_bar_start + (tick/2)), y = (min(ylim)+0.9), label=scale_text, size=8, colour=barfill)
+  p <- p + annotate("rect", xmin=scale_bar_start, xmax=scale_bar_end, ymin=(min(ylim)+0.6), ymax=(min(ylim)+0.7))
+  p <- p + annotate("text", x=(scale_bar_start + (tick/2)), y = (min(ylim)+0.9), label=scale_text, size=8)
 
   p <- p + ggtitle(title)
 
