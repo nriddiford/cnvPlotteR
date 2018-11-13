@@ -35,16 +35,19 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
     if(length>2e5){
       from <- bp1 - 50000
       to <- bp2 + 50000
-      # tick = 5e5
+      tick = 5e5
+      rounder = 1e5
     } else if(length>1e4) {
       from <- bp1 - 10000
       to <- bp2 + 10000
-      # tick = 1e4
+      tick = 1e4
+      rounder = 1e4
     }
     else{
       from <- bp1 - 5000
       to <- bp2 + 5000
-      # tick = 1e3
+      tick = 1e3
+      rounder = 1e4
     }
   }
 
@@ -76,8 +79,8 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
 
   if (missing(title)) title <- paste0(sample, chrom)
 
-  from <- plyr::round_any(from, 1e5, floor)
-  to <- plyr::round_any(to, 1e5, ceiling)
+  from <- plyr::round_any(from, rounder, floor)
+  to <- plyr::round_any(to, rounder, ceiling)
 
   region <- clean_file %>%
     dplyr::filter(chromosome == chrom) %>%
@@ -121,7 +124,7 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
     p <- p + geom_vline(xintercept = bp2, colour="slateblue", alpha=.7, linetype="dotted")
   }
 
-  scale_bar_start <- (from+(tick/10))
+  scale_bar_start <- (from+tick)
   scale_bar_end <- (scale_bar_start + tick)
 
   scale_text <- paste(tick/1000000, "Mb")
