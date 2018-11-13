@@ -111,9 +111,9 @@ regionPlot <- function(cnv_file, from=2950000, to=3400000, chrom="X", ylim=c(-5,
     p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#8FBD80FE")
     p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
 
-    p <- p + annotate("text", x = kirreStart+10000, y = (min(ylim)+0.25), label="Kirre", size=6)
+    p <- p + annotate("text", x = 3037000, y = (min(ylim)+0.25), label="Kirre", size=6)
     p <- p + annotate("text", x = 3153000, y = (min(ylim)+0.25), label="Notch", size=6)
-    p <- p + annotate("text", x = dunceEnd-50000, y = (min(ylim)+0.25), label="Dunce", size=6)
+    p <- p + annotate("text", x = 3259000, y = (min(ylim)+0.25), label="Dunce", size=6)
   }
 
   if(draw_bps){

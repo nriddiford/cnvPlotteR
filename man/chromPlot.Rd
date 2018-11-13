@@ -2,14 +2,15 @@
 % Please edit documentation in R/plotChrom.R
 \name{chromPlot}
 \alias{chromPlot}
-\title{chromPlot}
+\title{Function to plot a single chromosomes for a given sample}
 \usage{
-chromPlot(chrom = NA, cnv_file, ylim = c(-5, 5))
+chromPlot(cnv_file, chrom = NA, ylim = c(-5, 5), ext = "png",
+  theme = "white", write = TRUE)
 }
 \arguments{
-\item{chrom}{Specify the chromosome to plot [Defualt 'X']}
-
 \item{cnv_file}{File to plot. [Required]}
+
+\item{chrom}{Specify the chromosome to plot [Defualt 'X']}
 
 \item{ylim}{Adjust y axis limits in plot [Default ylim=c(-5,5)]}
 }

@@ -4,7 +4,7 @@
 \alias{allPlot}
 \title{allPlot}
 \usage{
-allPlot(path = "data/")
+allPlot(path = "data/", outdir = "plots")
 }
 \arguments{
 \item{path}{Sets the path to cnv files. [Default "data/"]}
