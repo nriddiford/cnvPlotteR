@@ -16,34 +16,42 @@
 #' @examples regionPlot(cnv_file="data/w500/test.window-500.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
 
 
-regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5),
-                       tick=100000, bp1=NA, bp2=NA, title=NA, ext='png', theme = 'white') {
+regionPlot <- function(cnv_file, from=2950000, to=3400000, chrom="X", ylim=c(-5,5),
+                       tick=100000, bp1=NULL, bp2=NULL, position=NULL, title=NA, ext='png', theme = 'white', write=F) {
+
+  if (missing(cnv_file) ) {
+    if (!missing(position) || missing(from) || missing(to) || missing(chrom)){
+      stop("Required arguments: `cnv_file` `from`, `to`, `chrom`", call. = FALSE)
+    }
+  }
 
   cat("Processing", cnv_file, "\n")
 
   if(!grepl('\\.', ext)) ext <- paste0('.', ext)
+  cat("Specified region", from, "-", to, "on", chrom, "\n")
 
-  if (is.na(from) && is.na(to)) {
-    from <- 2950000
-    to <- 3400000
-    chrom <- "X"
-    cat("No region specified - defaulting to X:2950000-3400000", "\n")
-  } else {
-    cat("Specified region", from, "-", to, "on", chrom, "\n")
-    notch <- F
+  if (!missing(position)){
+    vars <- unlist(strsplit(position, ":|-"))
+    chrom <- vars[1]
+    bp1 <- as.integer(vars[2])
+    bp2 <- as.integer(vars[3])
+    length <- bp2 - bp1
+    from <- bp1 - length*5
+    to <- bp2 + length*5
   }
 
   if(to > 2500000 && from < 3750000 && chrom == "X"){
     cat("Specified Notch locus\n")
     notch <- T
+  } else {
+    notch <- F
   }
 
-
-  if ( !is.na(bp1) && !is.na(bp2) ){
+  if ( !missing(bp1) && !missing(bp2) ){
     cat("Drawing lines for breakpoints: bp1=", bp1, " bp2=", bp2, "\n")
-    draw_bps <- 1
+    draw_bps <- TRUE
   } else {
-    draw_bps <- F
+    draw_bps <- FALSE
   }
 
   cat("Chrom:", chrom, "\n")
@@ -62,7 +70,7 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5),
   read_file_in <- read.delim(cnv_file, header = T)
   clean_file <- cleanR(read_file_in, region=T)
 
-  if (is.na(title)) title <- paste(sample, chrom, sep = " ")
+  if (missing(title)) title <- paste(sample, chrom, sep = " ")
 
   # For white background
   if(theme=='white'){
@@ -95,8 +103,6 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5),
   p <- p + scale_colour_gradientn(colours = cols, values = rescale(c(-3, -0.25, 0, 0.25, 3)), guide = "colorbar", limits = ylim)
   p <- p + customTheme
 
-  # 2740384 3134532
-
   if(notch){
     kirreStart = 2740384
     if (kirreStart < from)
@@ -105,9 +111,9 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5),
     p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#8FBD80FE")
     p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
 
-    p <- p + annotate("text", x = 3037000, y = (min(ylim)+0.25), label="Kirre", size=6)
+    p <- p + annotate("text", x = kirreStart+10000, y = (min(ylim)+0.25), label="Kirre", size=6)
     p <- p + annotate("text", x = 3153000, y = (min(ylim)+0.25), label="Notch", size=6)
-    p <- p + annotate("text", x = 3259000, y = (min(ylim)+0.25), label="Dunce", size=6)
+    p <- p + annotate("text", x = dunceEnd-50000, y = (min(ylim)+0.25), label="Dunce", size=6)
   }
 
   if(draw_bps){
@@ -129,7 +135,9 @@ regionPlot <- function(cnv_file, from=NA, to=NA, chrom="X", ylim=c(-5,5),
   } else {
     outfile <- paste0(sample, ".", chrom, "_", from, "-", to, ".", ext)
   }
-  cat("Writing file", outfile, "to '../plots/regions/'", "\n")
-  # ggsave(paste("plots/regions/", outfile, sep = ""), width = 20, height = 10)
+  if(write){
+    cat("Writing file", outfile, "to '../plots/regions/'", "\n")
+    ggsave(paste("plots/regions/", outfile, sep = ""), width = 20, height = 10)
+  }
   p
 }
