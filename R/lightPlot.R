@@ -124,12 +124,12 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
     p <- p + geom_vline(xintercept = bp2, colour="slateblue", alpha=.7, linetype="dotted")
   }
 
-  scale_bar_start <- (from+tick)
-  scale_bar_end <- (scale_bar_start + tick)
-
-  scale_text <- paste(tick/1000000, "Mb")
-  p <- p + annotate("rect", xmin=scale_bar_start, xmax=scale_bar_end, ymin=(min(ylim)+0.6), ymax=(min(ylim)+0.7))
-  p <- p + annotate("text", x=(scale_bar_start + (tick/2)), y = (min(ylim)+0.9), label=scale_text, size=8)
+  # scale_bar_start <- (from+tick)
+  # scale_bar_end <- (scale_bar_start + tick)
+  #
+  # scale_text <- paste(tick/1000000, "Mb")
+  # p <- p + annotate("rect", xmin=scale_bar_start, xmax=scale_bar_end, ymin=(min(ylim)+0.6), ymax=(min(ylim)+0.7))
+  # p <- p + annotate("text", x=(scale_bar_start + (tick/2)), y = (min(ylim)+0.9), label=scale_text, size=8)
 
   p <- p + ggtitle(title)
 
