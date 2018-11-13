@@ -98,23 +98,23 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
   p <- p + cleanTheme() +
     theme(axis.text.x = element_text(angle = 90, hjust=1,vjust = 0.5))
 
-  if(notch){
-    kirreStart = 2740384
-    dunceEnd = 3343000
-    if (kirreStart < from){
-      kirreStart = from
-    }
-    if (dunceEnd > to){
-      dunceEnd = to
-    }
-    p <- p + annotate("rect", xmin=kirreStart, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#CFAEAEFE")
-    p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#8FBD80FE")
-    p <- p + annotate("rect", xmin=3176000, xmax=dunceEnd, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
-
-    p <- p + annotate("text", x = kirreStart+100000, y = (min(ylim)+0.25), label="Kirre", size=6)
-    p <- p + annotate("text", x = 3153000, y = (min(ylim)+0.25), label="Notch", size=6)
-    p <- p + annotate("text", x = dunceEnd-100000, y = (min(ylim)+0.25), label="Dunce", size=6)
-  }
+  # if(notch){
+  #   kirreStart = 2740384
+  #   dunceEnd = 3343000
+  #   if (kirreStart < from){
+  #     kirreStart = from
+  #   }
+  #   if (dunceEnd > to){
+  #     dunceEnd = to
+  #   }
+  #   p <- p + annotate("rect", xmin=kirreStart, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#CFAEAEFE")
+  #   p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#8FBD80FE")
+  #   p <- p + annotate("rect", xmin=3176000, xmax=dunceEnd, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
+  #
+  #   p <- p + annotate("text", x = kirreStart+100000, y = (min(ylim)+0.25), label="Kirre", size=6)
+  #   p <- p + annotate("text", x = 3153000, y = (min(ylim)+0.25), label="Notch", size=6)
+  #   p <- p + annotate("text", x = dunceEnd-100000, y = (min(ylim)+0.25), label="Dunce", size=6)
+  # }
 
   if(draw_bps){
     p <- p + geom_vline(xintercept = bp1, colour="slateblue", alpha=.7, linetype="dotted")
