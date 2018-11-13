@@ -32,14 +32,19 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
     bp2 <- as.integer(vars[3])
     length <- bp2 - bp1
 
-    if(length>1e5){
+    if(length>2e5){
       from <- bp1 - 50000
       to <- bp2 + 50000
-      tick = 1e5
-    } else{
+      # tick = 5e5
+    } else if(length>1e4) {
+      from <- bp1 - 10000
+      to <- bp2 + 10000
+      # tick = 1e4
+    }
+    else{
       from <- bp1 - 5000
       to <- bp2 + 5000
-      tick = 1e4
+      # tick = 1e3
     }
   }
 
@@ -78,7 +83,8 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
     dplyr::filter(chromosome == chrom) %>%
     dplyr::filter(position >= from,
                   position <= to) %>%
-    mutate(mavlog2 = RcppRoll::roll_mean(log2, 10, fill=0))
+
+    dplyr::mutate(mavlog2 = RcppRoll::roll_mean(log2, 10, fill=0))
 
   ylim <- plyr::round_any(max(abs(region$mavlog2)), 1, ceiling)
   if (ylim < 3)
@@ -87,10 +93,10 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
 
   p <- ggplot(region, aes(x = position, y = mavlog2))
   p <- p + geom_line(aes(colour = chromosome), size=2, show.legend = FALSE)
-  p <- p + scale_x_continuous("Mb", expand = c(0.001, 0.001), breaks = seq(from, to, by = tick), labels = seq(from/1e6, to/1e6, by = tick/1e6))
+  p <- p + scale_x_continuous("Mb", expand = c(0.001, 0.001))
   p <- p + scale_y_continuous("Log2 FC ratio", limits=c(min(ylim),max(ylim)), expand = c(0.02, 0.02), breaks = seq(min(ylim), max(ylim),by=1))
   p <- p + cleanTheme() +
-    theme(axis.text.x = element_text(angle = 90, hjust=1))
+    theme(axis.text.x = element_text(angle = 90, hjust=1,vjust = 0.5))
 
   if(notch){
     kirreStart = 2740384
