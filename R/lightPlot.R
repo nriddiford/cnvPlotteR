@@ -48,18 +48,18 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
     }
   }
 
-  cat("Processing", cnv_file, "\n")
-  cat("Specified region", from, "-", to, "on", chrom, "\n")
+  # cat("Processing", cnv_file, "\n")
+  # cat("Specified region", from, "-", to, "on", chrom, "\n")
 
   if(to > 2500000 && from < 3750000 && chrom == "X"){
-    cat("Specified Notch locus\n")
+    # cat("Specified Notch locus\n")
     notch <- TRUE
   } else {
     notch <- FALSE
   }
 
   if ( !missing(bp1) && !missing(bp2) || !missing(position) ){
-    cat("Drawing lines for breakpoints: bp1:", bp1, " bp2:", bp2, "\n")
+    # cat("Drawing lines for breakpoints: bp1:", bp1, " bp2:", bp2, "\n")
     draw_bps <- TRUE
   } else {
     draw_bps <- FALSE
@@ -69,7 +69,7 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
   parts <- strsplit(base, "[.]")[[1]]
   sample <- parts[1]
 
-  cat("Light-plotting region ", chrom, ":", from, "-", to, " for ", sample, "\n", sep="")
+  # cat("Light-plotting region ", chrom, ":", from, "-", to, " for ", sample, "\n", sep="")
 
   read_file_in <- data.table::fread(cnv_file, header = T, select=c('chromosome', 'position', 'log2'))
   clean_file <- cleanR(read_file_in, region=T)
