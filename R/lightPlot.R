@@ -67,8 +67,8 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
   customTheme = cleanTheme()
   barfill = 'black'
 
-  from <- round_any(from, 1e5, floor)
-  to <- round_any(to, 1e5, ceiling)
+  from <- plyr::round_any(from, 1e5, floor)
+  to <- plyr::round_any(to, 1e5, ceiling)
 
   region <- clean_file %>%
     dplyr::filter(chromosome == chrom) %>%
@@ -76,7 +76,7 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
                   position <= to) %>%
     mutate(mavlog2 = roll_mean(log2, 10, fill=0))
 
-  ylim <- round_any(max(abs(region$mavlog2)), 1, ceiling)
+  ylim <- plyr::round_any(max(abs(region$mavlog2)), 1, ceiling)
   if (ylim < 2)
     ylim = 2
   ylim <- c(-ylim, ylim)
