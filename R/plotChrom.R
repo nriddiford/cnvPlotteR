@@ -44,7 +44,7 @@ chromPlot <- function(cnv_file, chrom = NA, ylim=c(-5,5), ext='png',
     cat(theme, " not a valid theme. Please use 'white' or 'black'", "\n")
     break
   }
-  chrom_data <- filter(clean_file, chromosome == chrom)
+  chrom_data <- dplyr::filter(clean_file, chromosome == chrom)
 
   p <- ggplot(chrom_data, aes(start/1000000, log2, colour = log2))
   p <- p + geom_point()

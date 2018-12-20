@@ -27,15 +27,15 @@ plotCoverage <- function(counts_file = 'data/counts/A785-A788R11.tagged.SC.hits.
 
   df <- counts %>%
     gather(test, ref, key="sample", value = read_count) %>%
-    mutate(sample = recode(sample,
+    dplyr::mutate(sample = recode(sample,
                            test = "Tumour",
                            ref = "Control")) %>%
-    mutate(depth = (read_count/windowSize)*readLength) %>%
-    mutate(pos = start/1000000) %>%
-    select(sample, chromosome, depth, pos) %>%
+    dplyr::mutate(depth = (read_count/windowSize)*readLength) %>%
+    dplyr::mutate(pos = start/1000000) %>%
+    dplyr::select(sample, chromosome, depth, pos) %>%
 
-    filter(chromosome != "Y", chromosome != 4) %>%
-    arrange(chromosome, pos)
+    dplyr::filter(chromosome != "Y", chromosome != 4) %>%
+    dplyr::arrange(chromosome, pos)
 
 
     p <- ggplot(df) +

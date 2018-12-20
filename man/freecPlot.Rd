@@ -4,10 +4,15 @@
 \alias{freecPlot}
 \title{FreecPlot}
 \usage{
-freecPlot(cnv_file = "data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.txt")
+freecPlot(cnv_file = "data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.txt",
+  chroms = c("2L", "2R", "3L", "3R", "X"), write = F)
 }
 \arguments{
 \item{cnv_file}{File to plot. [Required]}
+
+\item{chroms}{Chromosomes to plot}
+
+\item{write}{Write plot to file? T/F}
 }
 \description{
 Function to plot the corrected CN for Control Freec "ratio" files.

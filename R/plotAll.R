@@ -21,7 +21,7 @@ allPlot <- function(path = 'data/', outdir = 'plots') {
 
     read_file_in <- read.delim(paste(path, file.names[i], sep = ""), header = T)
     clean_file <- cleanR(read_file_in)
-    clean_file <- filter(clean_file, chromosome != "Y" & chromosome != "4")
+    clean_file <- dplyr::filter(clean_file, chromosome != "Y" & chromosome != "4")
 
     # cols <- brewer.pal(n = 7, name = "RdBu")
     cols <- c("#941212FE", "#C44747FE", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
