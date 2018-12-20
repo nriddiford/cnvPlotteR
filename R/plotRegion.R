@@ -10,7 +10,7 @@
 #' @param bp1 Draw a vertical line at given coordinate to mark bp1
 #' @param bp2 Draw a vertical line at given coordinate to mark bp2
 #' @param title Plot title
-#' @import scales ggplot2 dplyr RColorBrewer
+#' @import scales ggplot2 dplyr plyr RColorBrewer
 #' @keywords plot region
 #' @export
 #' @examples regionPlot(cnv_file="data/w500/test.window-500.cnv", from=3050000, to=3450000, chrom="X", ylim=c(-7,7), bp1=3129368,bp2=3352041, tick=100000, title="222Kb DEL on X")
@@ -40,7 +40,7 @@ regionPlot <- function(cnv_file, from=2950000, to=3400000, chrom="X", ylim=c(-5,
     to <- bp2 + length*5
   }
 
-  if(to > 2500000 && from < 3750000 && chrom == "X"){
+  if(from > 2500000 && from < 3172000 && to >= 3134000 && to < 3750000 && chrom == "X"){
     cat("Specified Notch locus\n")
     notch <- T
   } else {
@@ -81,14 +81,16 @@ regionPlot <- function(cnv_file, from=2950000, to=3400000, chrom="X", ylim=c(-5,
   # For black background
   if(theme=='black'){
     # cols <- c("#EB7609", "#EBA17C", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
-
     # cols <- c("#F2EC3F", "#EBDE96", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
     cols <- c("#F5D520", "#EBDC86", "#BCC1CC", "#9ACAD6", "#4CA8E6")
-
     customTheme = blackTheme()
     ext <- paste0('_dark', ext)
     barfill = 'white'
   }
+
+  from <- plyr::round_any(from, 1000, floor)
+  to <- plyr::round_any(to, 1000, ceiling)
+
 
   region <- clean_file %>%
     filter(chromosome == chrom) %>%
@@ -106,14 +108,17 @@ regionPlot <- function(cnv_file, from=2950000, to=3400000, chrom="X", ylim=c(-5,
   if(notch){
     kirreStart = 2740384
     if (kirreStart < from)
-      kirreStart = from
+      kirreStart = from + 100
+    dncEnd <- 3343000
+    if (dncEnd > to)
+      dncEnd = to - 100
     p <- p + annotate("rect", xmin=kirreStart, xmax=3134000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#CFAEAEFE")
     p <- p + annotate("rect", xmin=3134000, xmax=3172000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#8FBD80FE")
-    p <- p + annotate("rect", xmin=3176000, xmax=3343000, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
+    p <- p + annotate("rect", xmin=3176000, xmax=dncEnd, ymin=(min(ylim)+0.5), ymax=min(ylim), alpha=.75, fill="#A9D0DEFE")
 
-    p <- p + annotate("text", x = 3037000, y = (min(ylim)+0.25), label="Kirre", size=6)
+    p <- p + annotate("text", x = kirreStart+(3134000-kirreStart)/2, y = (min(ylim)+0.25), label="Kirre", size=6)
     p <- p + annotate("text", x = 3153000, y = (min(ylim)+0.25), label="Notch", size=6)
-    p <- p + annotate("text", x = 3259000, y = (min(ylim)+0.25), label="Dunce", size=6)
+    p <- p + annotate("text", x = 3176000+(dncEnd-3176000)/2, y = (min(ylim)+0.25), label="Dunce", size=6)
   }
 
   if(draw_bps){
@@ -122,11 +127,13 @@ regionPlot <- function(cnv_file, from=2950000, to=3400000, chrom="X", ylim=c(-5,
   }
 
   scale_bar_start <- (from+(tick/10))
-  scale_bar_end <- (scale_bar_start + tick)
+  scale_bar_end <- (scale_bar_start + tick/10)
+  text_pos <- scale_bar_start + (scale_bar_end - scale_bar_start)
 
-  scale_text <- paste(tick/1000000, "Mb")
+
+  scale_text <- paste(tick/1e6, "Mb")
   p <- p + annotate("rect", xmin=scale_bar_start, xmax=scale_bar_end, ymin=(min(ylim)+1), ymax=(min(ylim)+0.8), fill=barfill)
-  p <- p + annotate("text", x=(scale_bar_start + (tick/2)), y = (min(ylim)+1.2), label=scale_text, size=8, colour=barfill)
+  p <- p + annotate("text", x=text_pos, y = (min(ylim)+1.2), label=scale_text, size=8, colour=barfill)
 
   p <- p + ggtitle(title)
 

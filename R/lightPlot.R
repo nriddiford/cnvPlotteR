@@ -86,7 +86,6 @@ lightPlot <- function(cnv_file, from=NULL, to=NULL, chrom=NULL, ylim=c(-5,5),
     dplyr::filter(chromosome == chrom) %>%
     dplyr::filter(position >= from,
                   position <= to) %>%
-
     dplyr::mutate(mavlog2 = RcppRoll::roll_mean(log2, 10, fill=0))
 
   ylim <- plyr::round_any(max(abs(region$mavlog2)), 1, ceiling)
