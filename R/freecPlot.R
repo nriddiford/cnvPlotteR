@@ -2,6 +2,8 @@
 #'
 #' Function to plot the corrected CN for Control Freec "ratio" files.
 #' @param cnv_file File to plot. [Required]
+#' @param chroms Chromosomes to plot
+#' @param write Write plot to file? T/F
 #' @import RColorBrewer
 #' @import scales
 #' @import dplyr
@@ -9,12 +11,11 @@
 #' @export
 #' @examples freecPlot(cnv_file = "data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.txt")
 
-freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.txt') {
+freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.txt',
+                      chroms=c('2L', '2R', '3L', '3R', 'X'),
+                      write=F) {
 
   cat("Processing", cnv_file, "\n")
-
-  dir.create(file.path("plots"), showWarnings = FALSE)
-  dir.create(file.path("plots", "freec"), showWarnings = FALSE)
 
   base = basename(cnv_file)
   parts <- strsplit(base, "[.]")[[1]]
@@ -23,11 +24,9 @@ freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.t
   # colnames(chrom_lengths) <- c("chr", "length")
 
   ratio <- read.delim(cnv_file, header = T)
+  sex_chroms <- grep(pattern = "X|Y", chroms, value = T)
+  autosomes <- grep(pattern = "X|Y", chroms, value = T, invert = T)
 
-  chroms = c('2L', '2R', '3L', '3R', 'X')
-
-  autosomes= c('2L', '2R', '3L', '3R', '4')
-  sex_chroms=c('X','Y')
   green <- '#12A116FE'
   sub_green <- '#9DD486FE'
   grey <- '#7A8B8B'
@@ -35,7 +34,7 @@ freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.t
   sub_red <- '#DBD828FE'
 
   ratio <- ratio %>%
-    filter(Chromosome %in% chroms) %>%
+    dplyr::filter(Chromosome %in% chroms) %>%
     droplevels()
 
   ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$Subclone_CN>2, sub_green, grey)
@@ -65,11 +64,12 @@ freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.t
 
   p <- p + scale_color_identity()
 
-  freecOut <- paste(sample, "freec_cn.png", sep='_')
-  cat("Writing file", freecOut, "\n")
-  ggsave(paste("plots/freec/", freecOut, sep=""), width = 20, height = 10)
-
+  if(write){
+    dir.create(file.path("plots", "freec"), showWarnings = FALSE)
+    freecOut <- paste(sample, "freec_cn.png", sep='_')
+    cat("Writing file", freecOut, "\n")
+    ggsave(paste("plots/freec/", freecOut, sep=""), width = 20, height = 10)
+    }
   p
-
 
 }
