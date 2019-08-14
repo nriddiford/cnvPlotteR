@@ -19,13 +19,16 @@ library(cnvPlotteR)
 ```
 ## Plot Control Freec normalised CNs
 
-The function `freecPlot` will plot all CNs for for all chromosomes (if using a non-Drosophila genome the variables `chroms` and `autosomes` should be adjusted accordingly). Sub-clonal CNs are highlighted too.   
+The function `freecPlot` will plot all CNs for for all chromosomes (if using a non-Drosophila genome the variables `chroms` and `autosomes` should be adjusted accordingly). Sub-clonal CNs are highlighted too.
 
 
 ```{R}
+chromosome_names <- c('2L', '2R', '3L', '3R', 'X', "Y")
+
 file.names <- dir("data/freec", pattern = ".txt")
+
 for (f in file.names){
-  freecPlot(cnv_file=paste("data/freec/",f, sep=''))
+  freecPlot(cnv_file=paste("data/freec/",f, sep=''), write=F, sex="XY", chroms=chromosome_names)
 }
 ```
 
