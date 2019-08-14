@@ -12,16 +12,14 @@
 #' @examples freecPlot(cnv_file = "data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.txt")
 
 freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.txt',
-                      chroms=c('2L', '2R', '3L', '3R', 'X'),
-                      write=F) {
+                      chroms=c('2L', '2R', '3L', '3R', 'X', "Y"),
+                      write=F, sex="XY") {
 
   cat("Processing", cnv_file, "\n")
 
   base = basename(cnv_file)
   parts <- strsplit(base, "[.]")[[1]]
   sample <- parts[1]
-  # chrom_lengths = read.delim(chrom_lengths_file, header = F)
-  # colnames(chrom_lengths) <- c("chr", "length")
 
   ratio <- read.delim(cnv_file, header = T)
   sex_chroms <- grep(pattern = "X|Y", chroms, value = T)
@@ -32,26 +30,28 @@ freecPlot <- function(cnv_file = 'data/freec/HUM-7.tagged.filt.SC.RG.bam_ratio.t
   grey <- '#7A8B8B'
   red <- '#CC2121FE'
   sub_red <- '#DBD828FE'
+  ratio$sex <- sex
 
   ratio <- ratio %>%
     dplyr::filter(Chromosome %in% chroms) %>%
+    dplyr::mutate(ploidy = ifelse(sex=="XY" & Chromosome %in% sex_chroms, 1, 2)) %>%
     droplevels()
 
-  ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$Subclone_CN>2, sub_green, grey)
-  ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$Subclone_CN>1, sub_green, ratio$colour)
+  ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$Subclone_CN>ratio$ploidy, sub_green, grey)
+  ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$Subclone_CN>ratio$ploidy, sub_green, ratio$colour)
 
-  ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$Subclone_CN<2 & ratio$Subclone_CN > 0,  sub_red, ratio$colour)
-  ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$Subclone_CN<1 & ratio$Subclone_CN > 0, sub_red, ratio$colour)
+  ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$Subclone_CN<ratio$ploidy & ratio$Subclone_CN > 0,  sub_red, ratio$colour)
+  ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$Subclone_CN<ratio$ploidy & ratio$Subclone_CN > 0, sub_red, ratio$colour)
 
-  ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$CopyNumber>2, green, ratio$colour)
-  ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$CopyNumber>1, green, ratio$colour)
+  ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$CopyNumber>ratio$ploidy, green, ratio$colour)
+  ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$CopyNumber>ratio$ploidy, green, ratio$colour)
 
-  ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$CopyNumber<2, red, ratio$colour)
-  ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$CopyNumber<1, red, ratio$colour)
+  ratio$colour <- ifelse(ratio$Chromosome %in% autosomes & ratio$CopyNumber<ratio$ploidy, red, ratio$colour)
+  ratio$colour <- ifelse(ratio$Chromosome %in% sex_chroms & ratio$CopyNumber<ratio$ploidy, red, ratio$colour)
 
   ratio$point_size <- ifelse(ratio$colour != grey, 0.9, 0.5)
 
-  ploidy<-2
+
   p <- ggplot(ratio)
   p <- p + geom_point(aes(Start, Ratio*ploidy, colour=colour),stat='identity', alpha =0.5, size = ratio$point_size)
   p <- p + scale_y_continuous("Normalised copy number", limits = c(0,6), breaks = seq(0,6, by=1))
