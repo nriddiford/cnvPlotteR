@@ -9,7 +9,7 @@
 #' @export
 #' @examples plotCoverage(counts_file = 'data/counts/A785-A788R11.tagged.SC.hits.filt-vs-A785-A788R12.tagged.SC.hits.filt.window-50000.minw-4.count', readLength=100,windowSize = 50000)
 
-plotCoverage <- function(counts_file = 'data/counts/A785-A788R11.tagged.SC.hits.filt-vs-A785-A788R12.tagged.SC.hits.filt.window-50000.minw-4.count', readLength=100,windowSize = 10000){
+plotCoverage <- function(counts_file = 'data/counts/A785-A788R11.tagged.SC.hits.filt-vs-A785-A788R12.tagged.SC.hits.filt.window-50000.minw-4.count', readLength=150, windowSize = 50000){
   counts <- read.delim(counts_file, header = T)
 
   cat("Specified read length:", readLength , "\n")
