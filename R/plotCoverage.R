@@ -34,9 +34,8 @@ plotCoverage <- function(counts_file = 'data/counts/A785-A788R11.tagged.SC.hits.
     dplyr::mutate(pos = start/1000000) %>%
     dplyr::select(sample, chromosome, depth, pos) %>%
 
-    dplyr::filter(chromosome != "Y", chromosome != 4) %>%
+    dplyr::filter(!chromosome %in% c("X", "Y"), chromosome != 4) %>%
     dplyr::arrange(chromosome, pos)
-
 
     p <- ggplot(df) +
       geom_density(aes(pos, depth, fill=sample, colour=sample), stat='identity', alpha =0.6) +

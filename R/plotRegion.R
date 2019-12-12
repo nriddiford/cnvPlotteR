@@ -36,11 +36,11 @@ regionPlot <- function(cnv_file, from=2950000, to=3400000, chrom="X", ylim=c(-5,
     bp1 <- as.integer(vars[2])
     bp2 <- as.integer(vars[3])
     length <- bp2 - bp1
-    from <- bp1 - length*5
-    to <- bp2 + length*5
+    from <- bp1 - length*3
+    to <- bp2 + length*3
   }
 
-  if(from > 2500000 && from < 3172000 && to >= 3134000 && to < 3750000 && chrom == "X"){
+  if(from >= 2500000 && from < 3172000 && to >= 3134000 && to <= 3750000 && chrom == "X"){
     cat("Specified Notch locus\n")
     notch <- T
   } else {
@@ -133,7 +133,7 @@ regionPlot <- function(cnv_file, from=2950000, to=3400000, chrom="X", ylim=c(-5,
 
   scale_text <- paste(tick/1e6, "Mb")
   p <- p + annotate("rect", xmin=scale_bar_start, xmax=scale_bar_end, ymin=(min(ylim)+1), ymax=(min(ylim)+0.8), fill=barfill)
-  p <- p + annotate("text", x=text_pos, y = (min(ylim)+1.2), label=scale_text, size=8, colour=barfill)
+  p <- p + annotate("text", x=(scale_bar_start + (tick/2)), y = (min(ylim)+1.2), label=scale_text, size=8, colour=barfill)
 
   p <- p + ggtitle(title)
 
