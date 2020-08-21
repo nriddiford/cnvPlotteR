@@ -10,7 +10,7 @@
 #' @examples allPlot(path="data/")
 
 
-allPlot <- function(path = 'data/', outdir = 'plots', chroms=c('2L', '2R', '3L', '3R', 'X', "Y"), ylim=c(-5,5)) {
+allPlot <- function(path = 'data/', outdir = 'plots', chroms=c('2L', '2R', '3L', '3R', 'X'), ylim=c(-5,5)) {
   dir.create(file.path(outdir), showWarnings = FALSE)
   file.names <- dir(path, pattern = ".cnv")
 
@@ -20,12 +20,11 @@ allPlot <- function(path = 'data/', outdir = 'plots', chroms=c('2L', '2R', '3L',
     sample <- parts[1]
 
     read_file_in <- read.delim(paste(path, file.names[i], sep = ""), header = T)
-    clean_file <- cleanR(read_file_in)
-    # clean_file <- dplyr::filter(clean_file, chromosome != "Y" & chromosome != "4")
+    clean_file <- cleanR(read_file_in) %>%
+      dplyr::filter(chromosome %in% chroms)
 
     # cols <- brewer.pal(n = 7, name = "RdBu")
     cols <- c("#941212FE", "#C44747FE", "#B3A5A5FE", "#4FA9BDFE", "#248DB3FE")
-
 
     p <- ggplot()
     p <- p + geom_point(data=clean_file, aes(start/1000000, log2, colour = log2), size = 1)
