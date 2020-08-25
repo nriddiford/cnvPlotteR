@@ -6,19 +6,40 @@
 #' @keywords theme
 #' @export
 
-# Standard cleantheme for white backgrounds
-cleanTheme <- function(base_size = 12){
+# # Standard cleantheme for white backgrounds
+# cleanTheme <- function(base_size = 12){
+#   theme(
+#     plot.title = element_text(hjust = 0.5, size = 20),
+#     panel.background = element_blank(),
+#     plot.background = element_rect(fill = "transparent",colour = NA),
+#     panel.grid.minor = element_blank(),
+#     panel.grid.major = element_blank(),
+#     axis.line.x = element_line(color="black", size = 0.5),
+#     axis.line.y = element_line(color="black", size = 0.5),
+#     axis.text = element_text(size=20),
+#     axis.title = element_text(size=20)
+#     )
+# }
+
+# From svBreaks
+cleanTheme <- function(base_size = 12) {
   theme(
-    plot.title = element_text(hjust = 0.5, size = 20),
+    plot.title = element_text(hjust = 0.5, size = 15),
     panel.background = element_blank(),
-    plot.background = element_rect(fill = "transparent",colour = NA),
+    plot.background = element_rect(fill = "transparent", colour = NA),
     panel.grid.minor = element_blank(),
     panel.grid.major = element_blank(),
-    axis.line.x = element_line(color="black", size = 0.5),
-    axis.line.y = element_line(color="black", size = 0.5),
-    axis.text = element_text(size=20),
-    axis.title = element_text(size=20)
-    )
+    panel.spacing = unit(2, "lines"),
+    axis.line.x = element_line(color = "black", size = 0.5),
+    axis.line.y = element_line(color = "black", size = 0.5),
+    axis.text = element_text(size=rel(1.1)),
+    axis.title = element_text(size=rel(1.4)),
+    strip.text = element_text(size = 12),
+    strip.background = element_rect(
+      color="black", fill="#F2F2F2", size=1, linetype="solid"
+    ),
+    plot.margin = unit(1:4, "line")
+  )
 }
 
 
